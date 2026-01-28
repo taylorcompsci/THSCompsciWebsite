@@ -1,15 +1,15 @@
 "use client"
 
 import Image from "next/image";
-import * as THREE from "three";
-import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
-import Box from "@/app/model";
-import Model from "@/app/model";
-
+import Command from "@/app/util/Command";
 export default function Home() {
   return (
-    <div>
-      <Model/>
+    <div className="ml-5 mt-5">
+      <div className="text-2xl">
+        <p>THS CMD</p>
+        <p>Copyright THS Corp. All rights reserved</p>
+      </div>
+      <Command command="ls " text="argssfkalfas;"/>
     </div>
   )
 }

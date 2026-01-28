@@ -5,11 +5,10 @@ import { createRoot } from 'react-dom/client'
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame, ThreeElements } from '@react-three/fiber'
 import { Center, useGLTF } from '@react-three/drei'
-import { AsciiEffect } from "three/examples/jsm/Addons.js";
-import { Group } from "three/examples/jsm/libs/tween.module.js";
+import { AsciiRenderer, OrbitControls } from "@react-three/drei";
 
 
-function Box(props: ThreeElements['group']) {
+function Logo(props: ThreeElements['group']) {
     const THS_LOGO = useGLTF("/assets/logo.glb");
 
     const model_ref = useRef<THREE.Group>(null);
@@ -17,10 +16,13 @@ function Box(props: ThreeElements['group']) {
     const [hovered, hover] = useState(false)
     const [clicked, click] = useState(false);
 
-    useFrame(()=>model_ref.current?.rotateY(0.009));
+    const SPEED = 1;
 
     return (
         <Center>
+            <OrbitControls zoomSpeed={0} enableDamping={true} rotateSpeed={SPEED} onEnd={()=>{
+
+            }}/>
             <group scale={1.5} ref={model_ref} {...props}>
                 <primitive object={THS_LOGO.scene}/>
             </group>
@@ -32,14 +34,14 @@ export default function Model()
 {
 
     return (
-        <Canvas className="size-200 bg-black" onCreated={({ gl, scene, camera})=>{
-            const asciiEffect = new AsciiEffect(gl);
-            gl.render = (_) => asciiEffect.render(scene, camera);
-        }}>
-          <hemisphereLight intensity={1}/>
-          {/* <ambientLight color={[255,0,0]}/> */}
-          {/* <pointLight position={[10, 10, 10]} /> */}
-          <Box position={[0, 10, -1]} />
-        </Canvas>
+        <div className="w-screen">
+            <Canvas className="w-full h-full" gl={{ antialias: true}}>
+                {/* <AsciiRenderer characters="█▓▒░" color={true} resolution={0.55} bgColor="transparent"/> */}
+                <hemisphereLight intensity={0.75}/>
+                {/* <ambientLight color={[255,0,0]}/> */}
+                {/* <pointLight position={[10, 10, 10]} /> */}
+                <Logo position={[0, 10, -0.5]}/>
+            </Canvas>
+        </div>
     )
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localfont from "next/font/local";
 import "./globals.css";
+import Navbar from "@/app/navbar/Navbar";
 
 
 const scientifica = localfont({
@@ -36,9 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${scientifica.className} antialiased`}
+        className={`${scientifica.className} bg-background antialiased`}
       >
-        <h1 className="font-bold">Hello World!</h1>
+        <Navbar/>
         {children}
       </body>
     </html>

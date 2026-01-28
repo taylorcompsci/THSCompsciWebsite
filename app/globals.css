@@ -1,20 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: #232222;
+  --color-header: #414141;
+  --color-hover: #353535;
+  --animate-typewriter: typewriter 3s ease-in-out infinite;
+  
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes typewriter {
+ from { width: 0%;}
+ to { width: fit-content; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes blink {
+  0% { border-right: 1px solid white; }
+  
+  10% { border-right: none;}
+  
+  20% { border-right: 1px solid white; }
+  
+  30% { border-right: none;}
+
+  40% { border-right: 1px solid white; }
+
+  50% { border-right: none;}
+
+  60% { border-right: 1px solid white; }
+
+  70% { border-right: none;}
+
+  80% { border-right: 1px solid white; }
+
+  90% { border-right: none;}
+
+  100% { border-right: 1px solid white; }
+}
+
+@layer components
+{
+  .typewriter {
+    overflow: hidden;
+    animation: typewriter 5s, blink 5s;
   }
+}
+
+@layer base
+{
+    :root, html {
+      font-size: 16px;
+      color: white;
+    }
+
+    @media only screen and (max-width: 860px) {
+      :root, html {
+        font-size: 10px;
+      }
+    }
+
+    
+
 }
