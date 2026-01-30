@@ -56,6 +56,11 @@
   .fade-init {
     opacity: 0;
   }
+
+  .shadow_class {
+    text-shadow:4px 2px 0 var(--color-shdn);
+  }
+
 }
 
 @layer base
