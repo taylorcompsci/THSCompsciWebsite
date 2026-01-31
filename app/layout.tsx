@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localfont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/app/navbar/Navbar";
+import Navbar from "@/app/layout/Navbar";
+import Footer from "@/app/layout/Footer";
 
 
 const scientifica = localfont({
@@ -41,6 +42,7 @@ export default function RootLayout({
       >
         <Navbar/>
         {children}
+        <Footer/>
       </body>
     </html>
   );

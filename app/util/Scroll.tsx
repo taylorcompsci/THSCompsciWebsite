@@ -19,7 +19,7 @@ export default function Scroll({ children, ...props }: ScrollProps)
             items.forEach((item)=>{
                 item.target.classList.add("fade-in");
             })
-        }, { threshold: 0.5 });
+        }, { threshold: 0.5});
 
         observer.observe(divElement.current!);
     }, []);
@@ -27,9 +27,9 @@ export default function Scroll({ children, ...props }: ScrollProps)
 
 
     return (
-        <div {...props} ref={divElement}>
+        <section {...props} ref={divElement}>
            {children}
-        </div>
+        </section>
     )
 
 }

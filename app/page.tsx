@@ -7,6 +7,9 @@ import FeatureBox from "@/app/util/FeatureBox";
 
 import { useState } from "react";
 import ShadeButton from "@/app/util/ShadeButton";
+import Project from "@/app/util/Project";
+import Question from "@/app/util/Question";
+import Model from "@/app/util/Model";
 
 export default function Home() {
 
@@ -14,7 +17,7 @@ export default function Home() {
   const [ useShade, setShade ] = useState<boolean>(false);
 
   return (
-    <div className="ml-5 mt-5">
+    <main className="ml-5 mt-5">
       <div className="text-2xl">
         <p>THS CMD</p>
         <p>Copyright THS Club. All rights reserved</p>
@@ -28,17 +31,20 @@ export default function Home() {
       }}/>
 
      {commandFinished["start"] && 
-     <Scroll className="w-[50%]">
-        <h1 className="mt-15 text-6xl shadow_class">Creating the next generations of coders!</h1> 
-        <p className="ml-3 text-2xl mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor</p>
-        <div className="flex gap-5 mt-10" onMouseLeave={()=>setShade(false)}>
-          <ShadeButton shade={!useShade} onMouseEnter={()=>setShade(true)}>CSHS</ShadeButton>
-          <ShadeButton shade={useShade} onMouseEnter={()=>setShade(false)}>Gallery</ShadeButton>
+     <Scroll className="flex justify-between items-center">
+        <div className="w-[50%]">
+          <h1 className="mt-15 text-6xl shadow_class">Creating the next generations of coders!</h1> 
+          <p className="ml-3 text-2xl mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor</p>
+          <div className="flex gap-5 mt-10" onMouseLeave={()=>setShade(false)}>
+            <ShadeButton shade={!useShade} onMouseEnter={()=>setShade(true)}>CSHS</ShadeButton>
+            <ShadeButton shade={useShade} onMouseEnter={()=>setShade(false)}>Gallery</ShadeButton>
+          </div>
         </div>
+        <Model/>
       </Scroll>}
 
       {commandFinished["start"] && (
-        <div className="mt-40">
+        <div className="mt-50">
           <Command text="cat pleasejoin.txt" callback={()=>{
             setCommandFinished({
               ...commandFinished,
@@ -47,19 +53,75 @@ export default function Home() {
           }}/>
           {
             commandFinished["pleasejoin"] && (
-              <div className="text-center flex flex-col items-center mt-10 gap-3">
-                  <h2 className="shadow_class text-white text-8xl">You Belong Here</h2>
-                  <p className="text-3xl w-[45%]">THS Computer Science Club is devoted to furthering students' interest and skill in CS beyond typical school curriculum</p>
+              <Scroll>
+                <div className="text-center flex flex-col items-center mt-10 gap-3">
+                    <h2 className="shadow_class text-white text-8xl">You Belong Here</h2>
+                    <p className="text-3xl w-[45%]">THS Computer Science Club is devoted to furthering students' interest and skill in CS beyond typical school curriculum</p>
 
-                  <div>
-                    <FeatureBox title="Competitions" description="Lorem fajskdlfjal;sjfasjf;ad fja;sdfj asfja jd fjklsjdfl;kajsld;fjlk;sfdj;ladjf;lkajd;fklaj" image_path="dkfajsdf;lsk"/>
-                  </div>
-              </div>  
+                    <div className="flex gap-x-10 mt-10">
+                      <FeatureBox title="Competitions" description="There's no complication in the words that you say in the day. What am I saying blah blah blah." image_path="dkfajsdf;lsk"/>
+                      <FeatureBox title="Competitions" description="There's no complication in the words that you say in the day. What am I saying blah blah blah." image_path="dkfajsdf;lsk"/>
+                      <FeatureBox title="Competitions" description="There's no complication in the words that you say in the day. What am I saying blah blah blah." image_path="dkfajsdf;lsk"/>
+                    </div>
+                </div>  
+              </Scroll>
           )
-          }
+        }
 
         </div>
       )}
-    </div>
+
+      {commandFinished["pleasejoin"] && 
+      (
+        <div className="mt-30">
+          <Command text="cat project_highlight.txt" callback={()=>{
+            setCommandFinished({
+              ...commandFinished,
+              "project_highlight": true
+            })
+          }}/>
+
+          {
+            commandFinished["project_highlight"] && (
+              <Scroll className="flex text-center flex-col items-center mt-15">
+                <h2 className="shadow_class text-white text-6xl">Highlighted Projects</h2>
+                <div className="flex gap-5 flex-wrap justify-center mt-10">
+                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
+                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
+                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
+                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
+                </div>
+              </Scroll>
+            )
+          }
+        </div>
+      )
+      }
+
+      {
+        commandFinished["project_highlight"] && (
+          <div className="my-15">
+            <Command text="cat faq.txt" callback={()=>{
+              setCommandFinished({
+                ...commandFinished,
+                "faq": true
+              })
+            }}/>
+            
+            {
+              commandFinished["faq"] && (
+                <Scroll className="flex flex-wrap gap-x-5 gap-y-5 pt-5">
+                  <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>
+                  <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>
+                  <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>
+                  <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>
+                </Scroll>
+              )
+            }
+
+          </div>
+        )
+      }
+    </main>
   )
 }
