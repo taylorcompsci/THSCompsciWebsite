@@ -6,7 +6,7 @@ import React, { useRef, useState } from 'react'
 import { Canvas, useFrame, ThreeElements } from '@react-three/fiber'
 import { Center, useGLTF } from '@react-three/drei'
 import { AsciiRenderer, OrbitControls } from "@react-three/drei";
-import { EffectComposer, Pixelation } from "@react-three/postprocessing";
+// import { EffectComposer, Pixelation } from "@react-three/postprocessing";
 
 
 function Logo(props: ThreeElements['group']) {

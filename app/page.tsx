@@ -50,7 +50,7 @@ export default function Home() {
       </Scroll>}
 
       {commandFinished["start"] && (
-        <div className="mt-50">
+        <div className="">
           <Command text="cat pleasejoin.txt" callback={()=>{
             setCommandFinished({
               ...commandFinished,
