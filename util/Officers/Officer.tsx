@@ -47,9 +47,9 @@ export default function Officer(props : OfficerProps)
 }
 
 function Social({ link, icon: Icon}: { link : string, icon: IconType})
-{
+{ 
     return (
-        <Link href={link} className="size-6 flex items-center justify-center border rounded-full transition-transform hover:-translate-y-0.5 ">
+        <Link href={link} replace={false} target="_blank" rel="noopener noreferrer" className="size-6 flex items-center justify-center border rounded-full transition-transform hover:-translate-y-0.5 ">
             <Icon className="w-full h-full"/>
         </Link>
     )

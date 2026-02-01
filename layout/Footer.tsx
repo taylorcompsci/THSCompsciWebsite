@@ -1,7 +1,7 @@
 export default function Footer()
 {
     return (
-        <div className="w-full bg-header h-120 p-5">
+        <div className="w-full bg-header h-120 p-5 mt-10">
             <h1 className="underline text-4xl">James E. Taylor Computer Science Club</h1>
             <div className="flex">
                 <div>

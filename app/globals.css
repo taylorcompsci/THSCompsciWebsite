@@ -70,7 +70,7 @@
       color: white;
     }
     
-    @media only screen and (max-width: 860px) {
+    @media only screen and (max-width: 1060px) {
       :root, html {
         font-size: 10px;
       }

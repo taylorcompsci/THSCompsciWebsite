@@ -13,7 +13,7 @@ interface ProjectProps
 export default function Project({ title, author, description, link, image_path} : ProjectProps)
 {
     return (
-        <Link href={link}>
+        <Link href={link} replace={false} target="_blank" rel="noopener noreferrer">
             <div className="group border border-white w-100 overflow-hidden">
                 <div className="overflow-hidden w-100 h-50">
                     <Image src={image_path} alt={`Picture of ${author}'s project: ${title}`} width={400} height={300} className="w-full object-cover transition-all group-hover:grayscale group-hover:scale-125 size-full"/>
