@@ -22,7 +22,7 @@ export default function Scroll({ children, ...props }: ScrollProps)
                 if(item.isIntersecting)
                 item.target.classList.add("fade-in");
             })
-        }, { threshold: 0.25});
+        }, { threshold: 0.001});
 
         observer.observe(divElement.current!);
     }, []);

@@ -1,8 +1,10 @@
 import Image from "next/image"
 import Link from "next/link";
 
-import { BsInstagram, BsDiscord, BsGithub } from "react-icons/bs";
-import { IconType } from "react-icons";
+import {Instagram, Github, Discord, Disc} from "@boxicons/react";
+import { BoxIconProps } from "@boxicons/react";
+
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 interface OfficerProps
 {
@@ -18,6 +20,8 @@ interface OfficerProps
     playing?: string
 }
 
+type IconType = ForwardRefExoticComponent<BoxIconProps & RefAttributes<SVGSVGElement>>;
+
 export default function Officer(props : OfficerProps)
 {
     return (
@@ -28,15 +32,15 @@ export default function Officer(props : OfficerProps)
                 <h2 className="font-bold text-3xl">{props.name}</h2>
                 <p className="text-xl mt-[-10] italic">{props.role}</p>
                 
-                <div className="flex py-2 gap-3 text-md">
+                <div className="flex py-2 gap-1 text-md">
                     {
-                        props.instagram && <Social icon={BsInstagram} link={props.instagram}/>
+                        props.instagram && <Social icon={Instagram} link={props.instagram}/>
                     }
                     {
-                        props.github && <Social icon={BsGithub} link={props.github}/>
+                        props.github && <Social icon={Github} link={props.github}/>
                     }
                     {
-                        props.discord && <Social icon={BsDiscord} link={props.discord}/>
+                        props.discord && <Social icon={Discord} link={props.discord}/>
                     }
                 </div>
 
@@ -49,8 +53,8 @@ export default function Officer(props : OfficerProps)
 function Social({ link, icon: Icon}: { link : string, icon: IconType})
 { 
     return (
-        <Link href={link} replace={false} target="_blank" rel="noopener noreferrer" className="size-8 flex items-center justify-center border rounded-full transition-transform hover:-translate-y-0.5 ">
-            <Icon className="w-full h-full"/>
+        <Link href={link} replace={false} target="_blank" rel="noopener noreferrer" className="size-8 flex items-center justify-center rounded-full transition-transform hover:-translate-y-0.5 ">
+            <Icon className="w-full h-full" pack="brands"/>
         </Link>
     )
 }

@@ -37,9 +37,9 @@ export default function Home() {
       }}/>
 
      {commandFinished["start"] && 
-     <Scroll className="flex items-center justify-between">
+     <Scroll className="flex items-center justify-between -mt-5">
         <div className="w-[50%]">
-          <h1 className="mt-15 text-6xl shadow_class">Creating the next generations of coders!</h1> 
+          <h1 className="text-6xl shadow_class">Creating the next generations of coders!</h1> 
           <p className="ml-3 text-2xl mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor</p>
           <div className="flex gap-5 mt-10" onMouseLeave={()=>setShade(false)}>
             <ShadeButton shade={!useShade} onMouseEnter={()=>setShade(true)} onClick={()=> redirect("/cshs")}>CSHS</ShadeButton>
