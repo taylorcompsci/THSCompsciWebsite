@@ -5,12 +5,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Canvas, ThreeElements, useFrame, useThree } from '@react-three/fiber'
 import { Center, useGLTF } from '@react-three/drei'
 import {  OrbitControls } from "@react-three/drei";
-import { EffectComposer, RenderPass, EffectPass, ASCIIEffect, ASCIITexture, BlendFunction } from "postprocessing";
+import { EffectComposer, RenderPass, EffectPass, ASCIIEffect, ASCIITexture, BlendFunction, BrightnessContrastEffect } from "postprocessing";
 
 useGLTF.preload("/assets/logo.glb");
 
 function Logo(props: ThreeElements['group']) {
-    const { scene, camera, gl} = useThree();
+    const { scene, camera, gl, size} = useThree();
     
     const composerRef = useRef<EffectComposer|null>(null);
 
@@ -21,18 +21,28 @@ function Logo(props: ThreeElements['group']) {
         composerRef.current = compos;
     
         const renderPass = new RenderPass(scene, camera);
-    
+        
         compos.addPass(renderPass);
     
-        const asciiTexture = new ASCIITexture({ characters: " .'`^\",:;Il!"});
+        const asciiTexture = new ASCIITexture({ characters: "@#&$%XMW80OQ"});
     
         const asciiEffect = new ASCIIEffect({
           asciiTexture: asciiTexture,
           cellSize: 10,
+          inverted: true
         //   color: "#FFFFFF"
         });
-
     
+        const dpRatio = window.devicePixelRatio;
+
+        const cellSize = Math.min(1, Math.floor(1/dpRatio), Math.floor(1*dpRatio));
+
+        composerRef.current.setSize(
+            size.width / cellSize,
+            size.height / cellSize
+        );
+
+        
         
         asciiEffect.blendMode.blendFunction = BlendFunction.SET;
         asciiEffect.blendMode.opacity.value = 1;

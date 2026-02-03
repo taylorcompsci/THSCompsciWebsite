@@ -4,31 +4,61 @@ import Link from "next/link"
 import clsx from "clsx"
 import { usePathname } from "next/navigation"
 
+import { useEffect, useState } from "react"
+
+import { Menu, X } from "@boxicons/react"
+
+const burgerMenuClassName = "hidden max-md:block";
+
 export default function Navbar()
 {
+    const [ useMenu, setMenu ] = useState<boolean>(false);
+
+    useEffect(()=>{
+        const html = document.querySelector("html");
+        if(html)
+        {
+            if(useMenu) scrollTo(0,0);
+            html.style.overflow = useMenu ? "hidden" : "auto";
+
+        }
+
+    }, [useMenu])
+
     return (
-        <nav className="bg-header flex items-center justify-between pl-3 h-12">
-            <h1 className="text-white text-2xl">THS COMPSCI</h1>
+        <nav className="bg-header flex items-center justify-between md:pl-3 h-12 max-md:h-18 max-md:justify-end max-md:flex-col-reverse max-md:items-end overflow-y-visibleI">
+            <h1 className="text-white text-2xl max-md:hidden">THS COMPSCI</h1>
             
-            <div className="h-full flex items-end">
-                <NavBTN text="Home" route=""/>
-                <NavBTN text="CSHS" route="cshs"/>
-                <NavBTN text="Gallery" route="gallery"/>
-                <NavBTN text="Officers" route="officers"/>
-                <NavBTN text="Resources" route="resources"/>
-                <NavBTN text="Projects" route="projects"/>
+            <div className={clsx("h-full flex items-end max-md:flex-col max-md:items-start max-md:z-100 transition-all", useMenu || "max-md:opacity-0 max-md:pointer-events-none",
+                "max-md:w-full max-md:h-screen max-md:fixed max-md:top-18 max-md:bg-background", !useMenu || "max-md:opacity-76" 
+            )}>
+                <NavBTN text="Home" route="" unset={()=>setMenu(false)}/>
+                <NavBTN text="CSHS" route="cshs" unset={()=>setMenu(false)}/>
+                <NavBTN text="Gallery" route="gallery" unset={()=>setMenu(false)}/>
+                <NavBTN text="Officers" route="officers" unset={()=>setMenu(false)}/>
+                <NavBTN text="Resources" route="resources" unset={()=>setMenu(false)}/>
+                <NavBTN text="Projects" route="projects" unset={()=>setMenu(false)}/>
             </div>
+            
+            <span className="hidden max-md:flex justify-end" onClick={()=>setMenu(prev=>!prev)}>
+                {
+                    !useMenu && <Menu size="lg"/> || <X size="lg"/>
+                }
+            </span>
+            
+
         </nav>
     )
 }
 
-function NavBTN({ text, route } : {text: string, route: string})
+function NavBTN({ text, route, unset } : {text: string, route: string, unset?: ()=>void})
 {
 
     const path = usePathname().toLowerCase().split("/");
 
     return (
-        <Link className={clsx("text-white text-2xl pl-4 pr-8 pt-1 rounded-tl-xl h-[75%] hover:bg-hover transition-colors", path[1] === (route.toLowerCase()) && "bg-background")}
+        <Link className={clsx("text-white text-2xl pl-4 pr-8 pt-1 rounded-tl-xl h-[75%] hover:bg-hover transition-colors max-md:w-full max-md:p-0 max-md:h-25 max-md:flex max-md:justify-center max-md:items-center max-md:rounded-none", path[1] === (route.toLowerCase()) && "bg-background")}
+            onClick={unset}
             href={`/${(route)}`}
         >
             <p>{text}</p>

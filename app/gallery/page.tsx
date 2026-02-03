@@ -26,7 +26,7 @@ export default function Gallery()
                     {
                         files.map((file, idx) => {
                             return (
-                                <div key={idx} className={clsx("transition-all hover:pl-3 hover:bg-hover active:brightness-200",
+                                <div key={idx} className={clsx("transition-all hover:pl-3 hover:bg-hover active:brightness-200 cursor-pointer",
                                     file === useFileName && "pl-3 bg-hover brightness-150" 
                                 )} onClick={
                                     ()=>{

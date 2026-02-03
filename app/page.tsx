@@ -20,11 +20,11 @@ export default function Home() {
   const [ useShade, setShade ] = useState<boolean>(false);
 
   return (
-    <main className={clsx("ml-5 mt-5",
+    <main className={clsx("ml-5 max-md:ml-0 mt-5",
       !commandFinished["start"] && "h-[500vh]"
 
     )}>
-      <div className="text-2xl">
+      <div className="text-2xl max-md:pl-3">
         <p>THS CMD</p>
         <p>Copyright THS Club. All rights reserved</p>
       </div>
@@ -37,11 +37,11 @@ export default function Home() {
       }}/>
 
      {commandFinished["start"] && 
-     <Scroll className="flex items-center justify-between -mt-5">
-        <div className="w-[50%]">
-          <h1 className="text-6xl shadow_class">Creating the next generations of coders!</h1> 
-          <p className="ml-3 text-2xl mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor</p>
-          <div className="flex gap-5 mt-10" onMouseLeave={()=>setShade(false)}>
+     <Scroll className="flex max-md:flex-col-reverse items-center justify-between -mt-5">
+        <div className="w-[50%] max-md:w-[80vw] max-md:flex max-md:flex-col max-md:items-center">
+          <h1 className="text-6xl max-md:text-center shadow_class">Creating the next generations of coders!</h1> 
+          <p className="ml-3 max-md:text-center text-2xl mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labor</p>
+          <div className="flex gap-5 mt-10 max-md:justify-center max-md:pb-20" onMouseLeave={()=>setShade(false)}>
             <ShadeButton shade={!useShade} onMouseEnter={()=>setShade(true)} onClick={()=> redirect("/cshs")}>CSHS</ShadeButton>
             <ShadeButton shade={useShade} onMouseEnter={()=>setShade(false)} onClick={()=> redirect("/gallery")}>Gallery</ShadeButton>
           </div>
@@ -62,9 +62,9 @@ export default function Home() {
               <Scroll>
                 <div className="text-center flex flex-col items-center mt-10 gap-3">
                     <h2 className="shadow_class text-white text-8xl">You Belong Here</h2>
-                    <p className="text-3xl w-[45%]">THS Computer Science Club is devoted to furthering students' interest and skill in CS beyond typical school curriculum</p>
+                    <p className="text-3xl w-[45%] max-md:w-full">THS Computer Science Club is devoted to furthering students' interest and skill in CS beyond typical school curriculum</p>
 
-                    <div className="flex gap-x-10 mt-10">
+                    <div className="flex gap-x-10 mt-10 flex-wrap max-md:flex-col gap-y-5">
                       <FeatureBox title="Competitions" description="There's no complication in the words that you say in the day. What am I saying blah blah blah." image_path="dkfajsdf;lsk"/>
                       <FeatureBox title="Competitions" description="There's no complication in the words that you say in the day. What am I saying blah blah blah." image_path="dkfajsdf;lsk"/>
                       <FeatureBox title="Competitions" description="There's no complication in the words that you say in the day. What am I saying blah blah blah." image_path="dkfajsdf;lsk"/>
@@ -92,10 +92,10 @@ export default function Home() {
               <Scroll className="flex text-center flex-col items-center mt-15">
                 <h2 className="shadow_class text-white text-6xl">Highlighted Projects</h2>
                 <div className="flex gap-5 flex-wrap justify-center mt-10">
-                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
-                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
-                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
-                  <Project title="Project_One" author="Jaiden_Khosla" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/" link="https://cnn.com" image_path="/assets/Cat.JPG"/>
+                  <Project project={{name:"Project_One", author:"Jaiden_Khosla", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/", projectLink: "https://cnn.com", imageLink:"/assets/Cat.JPG"}}/>
+                  <Project project={{name:"Project_One", author:"Jaiden_Khosla", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/", projectLink: "https://cnn.com", imageLink:"/assets/Cat.JPG"}}/>
+                  <Project project={{name:"Project_One", author:"Jaiden_Khosla", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/", projectLink: "https://cnn.com", imageLink:"/assets/Cat.JPG"}}/>
+                  <Project project={{name:"Project_One", author:"Jaiden_Khosla", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute i/", projectLink: "https://cnn.com", imageLink:"/assets/Cat.JPG"}}/>
                 </div>
               </Scroll>
             )
@@ -116,7 +116,7 @@ export default function Home() {
             
             {
               commandFinished["faq"] && (
-                <Scroll className="flex flex-wrap gap-x-5 gap-y-5 pt-5 w-[70%]">
+                <Scroll className="flex flex-wrap gap-x-5 gap-y-5 pt-5 w-[70%] max-md:w-full max-md:flex-col max-md:items-center">
                   <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>
                   <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>
                   <Question question="Are there fees for the Computer Science Club?" answer="No :3"/>

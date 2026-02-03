@@ -3,18 +3,12 @@
 import Project from "@/util/Project";
 import Scroll from "@/util/Scroll";
 import { useEffect, useState } from "react";
-
-interface Project 
-{
-    projectLink: string,
-    imageLink: string,
-    Name: string
-}
+import { ProjectProps } from "@/util/Project";
 
 export default function Projects()
 {
 
-    const [ useProjects, setProjects ] = useState<Project[]>([]);
+    const [ useProjects, setProjects ] = useState<ProjectProps[]>([]);
 
     useEffect(()=>
     {
@@ -45,7 +39,7 @@ export default function Projects()
             <h1 className="shadow_class text-6xl my-10">Projects</h1>
 
             <section className="flex gap-5 flex-wrap justify-center">
-                {useProjects && useProjects.map((project, idx) => <Project key={`${project.Name}-${idx}`} title={project.Name} author={project.Name} description={""} link={project.projectLink} image_path={project.imageLink}/>)}
+                {useProjects && useProjects.map((project, idx) => project.hide || <Project key={`${project.name}-${idx}`} project={project}/>)}
             </section>
         </Scroll>
     )

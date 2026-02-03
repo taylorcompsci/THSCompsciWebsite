@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #131313;
+  --color-background: #000000;
   --color-header: #202020;
   --color-hover: #353535;
   --color-shdn: #5A5959;
@@ -73,7 +73,15 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-
+      
+    }
+    
+    @media screen and  (max-width: 768px) {
+        :root, html {
+          font-size: 2.4vw;
+          color: white;
+        }
+      
     }
     
 

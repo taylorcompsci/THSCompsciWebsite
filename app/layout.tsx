@@ -40,13 +40,13 @@ export default function RootLayout({
       <body
         className={`${scientifica.className} bg-background antialiased`}
       >
+        <div className="top-0 opacity-15 fixed pointer-events-none w-screen h-screen 
+        bg-[repeating-linear-gradient(to_bottom,transparent_0,white_3px)]"/>
         <Navbar/>
         <main className="min-h-screen">
           {children}
         </main>
 
-        <div className="top-0 opacity-15 fixed pointer-events-none w-screen h-screen 
-        bg-[repeating-linear-gradient(to_bottom,transparent_0,white_3px)]"/>
         <Footer/>
       </body>
     </html>
