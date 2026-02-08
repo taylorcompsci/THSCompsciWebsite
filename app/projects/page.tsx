@@ -16,7 +16,6 @@ export default function Projects()
     {
         getProjects().then(
             data=>{
-                console.log(data);
                 setProjects(data)
             }
         ).catch(err=>console.log(err));

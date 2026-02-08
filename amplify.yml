@@ -6,6 +6,7 @@ frontend:
                - npm install
        build:
            commands:
+               - env | grep -e MONGO_DB_URL -e S3_BUCKET_URL -e REQUEST_URL >> .env.production
                - npm run build
    artifacts:
        baseDirectory: .next

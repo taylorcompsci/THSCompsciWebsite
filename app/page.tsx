@@ -26,7 +26,7 @@ export default function Home() {
   const [ useProjects, setProjects ] = useState<ProjectProps[]>();
 
   useEffect(()=>{
-    getProjects().then(arr=>setProjects(arr.filter(proj=>proj && FEATURED_PROJECTS.includes(proj.Name))));
+    getProjects().then(arr=>arr && setProjects(arr.filter(proj=>proj && FEATURED_PROJECTS.includes(proj.Name))));
   }, [])
 
   return (
