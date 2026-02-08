@@ -31,7 +31,7 @@ export default function Projects()
             </div>
 
             <section className="flex gap-5 flex-wrap justify-center mt-10">
-                {useProjects && (useProjects!).map((project, idx) => project.hide || <Project key={`${project.name}-${idx}`} project={project}/>)}
+                {useProjects && (useProjects!).map((project, idx) => project.hide || <Project key={`${project.Name}-${idx}`} project={project}/>)}
             </section>
         </Scroll>
     )

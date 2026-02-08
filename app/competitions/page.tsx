@@ -62,7 +62,7 @@ export default function Competitions()
                         
                         <Project project={
                             {
-                                name: "Code Academy - Java Courses",
+                                Name: "Code Academy - Java Courses",
                                 author: "Code Academy",
                                 projectLink: "https://www.codecademy.com/learn/learn-java",
                                 imageLink: "/assets/competitionResources/codeAcademyJava.png",
@@ -71,7 +71,7 @@ export default function Competitions()
                         }/>
                         <Project project={
                             {
-                                name: "Java Full Course",
+                                Name: "Java Full Course",
                                 author: "BroCode",
                                 projectLink: "https://www.codecademy.com/learn/learn-java",
                                 imageLink: "/assets/competitionResources/BroCode.jpg",
@@ -85,7 +85,7 @@ export default function Competitions()
                         
                         <Project project={
                             {
-                                name: "USACO Guide",
+                                Name: "USACO Guide",
                                 author: "usacoguide",
                                 projectLink: "https://usaco.guide/dashboard",
                                 imageLink: "/assets/competitionResources/usacoGuide.png",
@@ -94,7 +94,7 @@ export default function Competitions()
                         }/>
                         <Project project={
                             {
-                                name: "Competitive Programmer's Handbook",
+                                Name: "Competitive Programmer's Handbook",
                                 author: "Antti Laaksonen",
                                 projectLink: "https://cses.fi/book/book.pdf",
                                 imageLink: "/assets/competitionResources/CompHandbook.png",
@@ -103,7 +103,7 @@ export default function Competitions()
                         }/>
                         <Project project={
                             {
-                                name: "Competitive Programming Algorithms",
+                                Name: "Competitive Programming Algorithms",
                                 author: "Open Source Community",
                                 projectLink: "https://cp-algorithms.com/",
                                 imageLink: "/assets/competitionResources/compAlgo.png",
@@ -117,7 +117,7 @@ export default function Competitions()
                         
                         <Project project={
                             {
-                                name: "UIL Legends",
+                                Name: "UIL Legends",
                                 author: "Andrew Yoon",
                                 projectLink: "https://uil-legends-api.onrender.com/",
                                 imageLink: "/assets/competitionResources/uilLegends.png",
@@ -126,7 +126,7 @@ export default function Competitions()
                         }/>
                         <Project project={
                             {
-                                name: "UIL-DL",
+                                Name: "UIL-DL",
                                 author: "Shubh Randeria",
                                 projectLink: "https://uildl.randeria.dev/",
                                 imageLink: "/assets/competitionResources/uildl.png",

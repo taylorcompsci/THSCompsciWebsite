@@ -11,8 +11,8 @@ import Scroll from "@/util/Scroll";
 
 type Project = Omit<ProjectProps, "imageLink">;
 
-const initialState = {
-        name: "", author: "", description: "", projectLink: ""
+const initialState: Project = {
+    Name: "", author: "", description: "", projectLink: ""
 };
 
 export default function CreateProject()
@@ -29,12 +29,12 @@ export default function CreateProject()
         <Scroll>
 
             <form className="flex flex-col gap-3 p-3 w-150">
-                <StyledInput id="title" value={useForm?.name} onChange={(event)=>setForm({...useForm, name: (event.target as HTMLInputElement).value })}/>
+                <StyledInput id="title" value={useForm?.Name} onChange={(event)=>setForm({...useForm, Name: (event.target as HTMLInputElement).value })}/>
                 <StyledInput id="author" value={useForm?.author} onChange={(event)=>setForm({...useForm, author: (event.target as HTMLInputElement).value})}/>
                 <StyledInput id="description" value={useForm?.description} onChange={(event)=>setForm({...useForm, description: (event.target as HTMLInputElement).value})}/>
                 <StyledInput id="project Link" value={useForm?.projectLink} onChange={(event)=>setForm({...useForm, projectLink: (event.target as HTMLInputElement).value})}/>
 
-                {useFile && <Image alt={useForm.name} src={URL.createObjectURL(useFile)} width={400} height={300}/>}
+                {useFile && <Image alt={useForm.Name} src={URL.createObjectURL(useFile)} width={400} height={300}/>}
                 <StyledInput id="Image" type="file" onChange={e=>setFile((e.target as HTMLInputElement).files?.item(0))}/>
 
                 <ShadeButton disabled={true} shade={true} changeShadeOnHover onClick={(e)=>{
@@ -42,7 +42,7 @@ export default function CreateProject()
 
                         e.preventDefault();
 
-                        if(useDb || !(useForm.author&&useForm.name&&useForm.description&&useForm.projectLink&&useFile)) return;
+                        if(useDb || !(useForm.author&&useForm.Name&&useForm.description&&useForm.projectLink&&useFile)) return;
                         
                         if(!isValidURL(useForm.projectLink)) {
                             setRes("Invalid project url!"); 
