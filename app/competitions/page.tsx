@@ -1,6 +1,6 @@
+import Project from "@/util/Project";
 import Scroll from "@/util/Scroll";
 import Image from "next/image";
-import Project from "@/util/Project";
 
 export default function Competitions()
 {
@@ -13,7 +13,7 @@ export default function Competitions()
                 </div>
 
                 <div className="text-center flex flex-col items-center">
-                    <Image src="/assets/Cat.JPG" className="w-100 mt-10" alt="CAT D:" width={300} height={400}/>
+                    <Image src="/assets/competitionResources/codewarsImage.png" className="w-100 mt-10" alt="CAT D:" width={300} height={400}/>
                     <p className="text-lg italic text-shdn">Us at HPE CodeWars :D</p>
                 </div>
             </Scroll>
@@ -54,7 +54,7 @@ export default function Competitions()
                     </div>
                 </section>
 
-                <section className="mt-10">
+                <Scroll className="mt-10">
                     <h1 className="text-6xl shadow_class text-center underline">Study Resources</h1>
                                 
                     <h2 className="text-6xl shadow_class text-center my-5">Learning Java</h2>
@@ -143,7 +143,7 @@ export default function Competitions()
                             }
                         }/> */}
                     </div>
-                </section>
+                </Scroll>
             </div>
         </div>
     )

@@ -34,7 +34,7 @@ export default function Navbar()
                 {/* <NavBTN text="CSHS" route="cshs" unset={()=>setMenu(false)}/> */}
                 <NavBTN text="Gallery" route="gallery" unset={()=>setMenu(false)}/>
                 <NavBTN text="Officers" route="officers" unset={()=>setMenu(false)}/>
-                <NavBTN text="Resources" route="resources" unset={()=>setMenu(false)}/>
+                <NavBTN text="Resources" route="competitions" unset={()=>setMenu(false)}/>
                 <NavBTN text="Projects" route="projects" unset={()=>setMenu(false)}/>
             </div>
             

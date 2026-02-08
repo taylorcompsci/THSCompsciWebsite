@@ -2,6 +2,7 @@
 
 import { ProjectProps } from "@/util/Project";
 
+
 export async function getProjects(): Promise<ProjectProps[]>
 {
     return fetch(process.env.MONGO_DB_URL!, {
@@ -17,12 +18,16 @@ export async function getProjects(): Promise<ProjectProps[]>
     )
     .then(
         json => {
+            
+          
             const projects = JSON.parse(json).body;
+            // return "D:"
+
             return projects;
         }
     )
     .catch(
-        err=>console.log(err)
+        err=>err
     );
 }
 
@@ -39,7 +44,7 @@ export async function uploadProject(project: BaseProject, imageFile: File): Prom
         method: "POST",
         body: JSON.stringify({
             "Action": "Add",
-            "Name": project.name,
+            "Name": project.Name,
             "author": project.author,
             "description": project.description,
             "imageLink": imageLink,

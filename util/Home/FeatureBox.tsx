@@ -7,15 +7,16 @@ interface FeatureBoxProps
 {
     title: string,
     description: string,
-    icon: IconType
+    icon: IconType,
+    route?: string
 }
 
-export default function FeatureBox({ title, description, icon: Icon}: FeatureBoxProps)
+export default function FeatureBox({ title, route, description, icon: Icon}: FeatureBoxProps)
 {
     return (
-        <Link href={`/${title.toLowerCase()}`}>
+        <Link href={route || `/${title.toLowerCase()}`}>
         
-            <div className="group border border-white flex flex-col items-start max-md:items-center max-md:text-center max-md:justify-center p-3 size-75 max-md:size-90 text-left">
+            <div className="group border border-white flex flex-col items-start max-md:items-center max-md:text-center max-md:justify-center p-3 h-full w-75 max-md:w-90 text-left">
                 
                 <div className="border border-white size-25 max-md:size-40 flex items-center justify-center">
                     <Icon size="3xl" pack="filled"/>
