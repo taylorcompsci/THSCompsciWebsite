@@ -37,7 +37,7 @@ export default function CreateProject()
                 {useFile && <Image alt={useForm.Name} src={URL.createObjectURL(useFile)} width={400} height={300}/>}
                 <StyledInput id="Image" type="file" onChange={e=>setFile((e.target as HTMLInputElement).files?.item(0))}/>
 
-                <ShadeButton disabled={true} shade={true} changeShadeOnHover onClick={(e)=>{
+                <ShadeButton disabled={useDb} shade={true} changeShadeOnHover onClick={(e)=>{
                     (async () => {
 
                         e.preventDefault();
