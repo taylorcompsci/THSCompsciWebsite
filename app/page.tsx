@@ -125,7 +125,7 @@ export default function Home() {
               commandFinished["faq"] && (
                 <Scroll className="flex flex-wrap gap-x-5 gap-y-5 pt-5 w-[70%] max-md:w-full max-md:flex-col max-md:items-center">
                   <Question question="Are there fees for the Computer Science Club?" answer="Our club will always be free!"/>
-                  <Question question="How much computer science do I need to know to join?" answer="You can join the club even if you don't any programming! However, to attend competitions and actively participate in our projcets/activites, we recommend you take CSA (or learn the basics of the Java Programming Language)."/>
+                  <Question question="How much computer science do I need to know to join?" answer="You can join the club even if you don't any programming! However, to attend competitions and actively participate in our projects/activities, we recommend you take CSA (or learn the basics of the Java Programming Language)."/>
                   <Question question="When are the meetings?" answer="We generally meet at the beginning of every month (always on a Wednesday) in Mr. Beck's room (room #1940). To stay notified, please either follow our Instagram or join our Remind/Discord."/>
                   <Question question="I would like to show off some of my projects! Where can I do that?" answer="We showcase all of our member projects on our project page! On the page, there will be a link where you can submit your projects."/>
                 </Scroll>

@@ -9,7 +9,7 @@ export default function Competitions()
             <Scroll className="flex flex-col text-center items-center max-md:flex-col-reverse">
                 <div className="flex flex-col items-center">
                     <h1 className="shadow_class text-6xl">Competitions</h1>
-                    <p className="w-180 max-md:w-100 text-lg">Competitions test your problem solving skills and algorithmic thinking! Competitive Programming is a great way to gain valueable experience for CS.</p>
+                    <p className="w-180 max-md:w-100 text-lg">Competitions test your problem solving skills and algorithmic thinking! Competitive Programming is a great way to gain valuable experience for CS.</p>
                 </div>
 
                 <div className="text-center flex flex-col items-center">
@@ -107,7 +107,7 @@ export default function Competitions()
                                 author: "Open Source Community",
                                 projectLink: "https://cp-algorithms.com/",
                                 imageLink: "/assets/competitionResources/compAlgo.png",
-                                description: "Open source project that translate the russian programming website, E-Maxx. Has a numerous amount of articles going over competitive programming topics in grave detail."
+                                description: "Open source project that translates the Russian programming website, E-Maxx. Has a numerous amount of articles going over competitive programming topics in grave detail."
                             }
                         }/>
                     </div>
