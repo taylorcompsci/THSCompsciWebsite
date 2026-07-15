@@ -63,7 +63,14 @@ async function getUploadUrl(event: any)
 export const lambda_function: APIGatewayProxyHandler = async (event) => {
     try
     {
-        const parsedEvent = JSON.parse(event.body ?? "{}");
+        console.log(`Request:${JSON.stringify(event)}`);
+        
+        const jsonEvent = validate_json(event.body ?? "{}");
+
+        if(!jsonEvent.success)
+            return response(400, { message: "Invalid JSON"});
+
+        const parsedEvent = jsonEvent.res ?? {};
 
         const { status, ...body} = await getUploadUrl(parsedEvent);
         return response(status, body);
@@ -77,3 +84,16 @@ export const lambda_function: APIGatewayProxyHandler = async (event) => {
     }
 }
 
+function validate_json(s: string): { res: any, success: boolean}
+{
+    try
+    {
+        const body = JSON.parse(s);
+
+        return { res: body, success: true};
+    }
+    catch(err)
+    {
+        return { res: {}, success: false}
+    }
+}
