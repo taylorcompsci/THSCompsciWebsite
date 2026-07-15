@@ -11,9 +11,9 @@ const CORS_HEADERS = {
 
 const insertSchema = zod.object({
     // "action" : zod.literal(["add", "access"]),
-    "name" : zod.string("Not a valid project name!"),
-    "project_link": zod.url("Not a valid project link!"),
-    "image_link": zod.url("Not a valid image link!"),
+    "Name" : zod.string("Not a valid project name!"),
+    "projectLink": zod.url("Not a valid project link!"),
+    "imageLink": zod.url("Not a valid image link!"),
     "author": zod.string("Not a valid author(s) name(s)!"),
     "description": zod.string("Not a valid description!")
 })
