@@ -13,7 +13,7 @@ const insertSchema = zod.object({
     // "action" : zod.literal(["add", "access"]),
     "Name" : zod.string("Not a valid project name!"),
     "projectLink": zod.url("Not a valid project link!"),
-    "imageLink": zod.url("Not a valid image link!"),
+    "imageLink": zod.string("Not a valid image path!"),
     "author": zod.string("Not a valid author(s) name(s)!"),
     "description": zod.string("Not a valid description!")
 })
@@ -22,8 +22,8 @@ const actionSchema = zod.object({
     "action": zod.literal(["add", "access"], "Invalid payload action.")
 });
 
-const dynamoDbClient = DynamoDBDocumentClient.from(new DynamoDBClient({region: process.env.AWS_REGION!}));
-const dynamoDbTable = process.env.DYNAMO_DB_TABLE!;
+const dynamoDbClient = DynamoDBDocumentClient.from(new DynamoDBClient({region: process.env.AWS_REGION ?? "us-east-2"}));
+const dynamoDbTable = process.env.DYNAMO_DB_TABLE ?? "thsprojects";
 
 function response(statusCode: number, body: unknown): APIGatewayProxyResult {
   return {
@@ -38,8 +38,11 @@ async function accessAll()
     const { Items } = await dynamoDbClient.send(
         new ScanCommand({ TableName: dynamoDbTable})
     );
+    const unfilteredItems = Items?.map(item=>insertSchema.safeParse(item)) ?? [];
 
-    return response(200,Items?.map(item=>insertSchema.safeParse(item)).filter(item=> item.success).map(item => item.data));
+    console.log(unfilteredItems);
+
+    return response(200, unfilteredItems.filter(item=> item.success).map(item => item.data));
 }
 
 async function addToDatabase(event: any)
