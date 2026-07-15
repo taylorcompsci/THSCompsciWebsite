@@ -6,7 +6,7 @@ frontend:
                - npm install
        build:
            commands:
-               - env | grep -e MONGO_DB_URL -e S3_BUCKET_URL -e REQUEST_URL -e GALLERY_BUCKET -e GALLERY_ACCESS_KEY -e GALLERY_ACCESS_KEY_ID >> .env.production
+               - env | grep -e DYNAMO_DB_URL -e S3_BUCKET_URL -e REQUEST_URL -e GALLERY_BUCKET -e GALLERY_ACCESS_KEY -e GALLERY_ACCESS_KEY_ID >> .env.production
                - npm run build
    artifacts:
        baseDirectory: .next

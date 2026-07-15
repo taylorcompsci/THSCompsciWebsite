@@ -16,6 +16,7 @@ export default function Projects()
     {
         getProjects().then(
             data=>{
+                // console.log(data);
                 setProjects(data)
             }
         ).catch(err=>console.log(err));
@@ -30,8 +31,8 @@ export default function Projects()
             </div>
 
             <section className="grid grid-cols-3 max-md:grid-cols-1 items-stretch gap-5 flex-wrap mt-10">
-                {useProjects && (useProjects!).map((project, idx) => project.hide || <Project key={`${project.Name}-${idx}`} project={project}/>)}
-                {/* {useProjects.toString()} */}
+                {(Array.isArray(useProjects) ? useProjects : []).map((project, idx) => project.hide || <Project key={`${project.Name}-${idx}`} project={project}/>)}
+                {useProjects.toString()}
             </section>
         </Scroll>
     )

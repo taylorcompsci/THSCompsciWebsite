@@ -19,7 +19,7 @@ export default function CreateProject()
 {
     const [ useForm, setForm ] = useState<Project>(initialState);
 
-    const [ useFile, setFile] = useState<File|null>();
+    const [ useFile, setFile] = useState<File | null | undefined>(null);
 
     const [ useDb, setDb ] = useState<boolean>(false);
 
@@ -28,40 +28,44 @@ export default function CreateProject()
     return (
         <Scroll>
 
-            <form className="flex flex-col gap-3 p-3 w-150">
-                <StyledInput id="title" value={useForm?.Name} onChange={(event)=>setForm({...useForm, Name: (event.target as HTMLInputElement).value })}/>
-                <StyledInput id="author" value={useForm?.author} onChange={(event)=>setForm({...useForm, author: (event.target as HTMLInputElement).value})}/>
-                <StyledInput id="description" value={useForm?.description} onChange={(event)=>setForm({...useForm, description: (event.target as HTMLInputElement).value})}/>
-                <StyledInput id="project Link" value={useForm?.projectLink} onChange={(event)=>setForm({...useForm, projectLink: (event.target as HTMLInputElement).value})}/>
+            <form className="flex flex-col gap-3 p-3 w-150" onSubmit={(e)=>{
+                e.preventDefault();
+
+
+                if(useDb) return; 
+                
+                if(!(useForm.author&&useForm.Name&&useForm.description&&useForm.projectLink&&useFile))
+                {
+                    setRes("Please fill out all the required fields!");
+                    return;
+                }
+                
+                if(!isValidURL(useForm.projectLink)) {
+                    setRes("Invalid project url!"); 
+                    return;
+                }
+
+                setDb(true);
+
+                uploadProject(useForm, useFile).then(res=>{
+                    setRes(res);
+
+                    setForm(initialState);
+                    setFile(null);
+
+                    setDb(false);
+                });
+
+            }}>
+                <StyledInput id="title" value={useForm?.Name} onChange={(event)=>setForm({...useForm, Name: (event.target as HTMLInputElement).value })} required/>
+                <StyledInput id="author" value={useForm?.author} onChange={(event)=>setForm({...useForm, author: (event.target as HTMLInputElement).value})} required/>
+                <StyledInput id="description" value={useForm?.description} onChange={(event)=>setForm({...useForm, description: (event.target as HTMLInputElement).value})} required/>
+                <StyledInput id="project Link" value={useForm?.projectLink} onChange={(event)=>setForm({...useForm, projectLink: (event.target as HTMLInputElement).value})} required/>
 
                 {useFile && <Image placeholder="blur" blurDataURL="/assets/placeholder.webp" unoptimized alt={useForm.Name} src={URL.createObjectURL(useFile)} width={400} height={300}/>}
                 <StyledInput id="Image" type="file" onChange={e=>setFile((e.target as HTMLInputElement).files?.item(0))}/>
 
-                <ShadeButton disabled={useDb} shade={true} changeShadeOnHover onClick={(e)=>{
-                    (async () => {
-
-                        e.preventDefault();
-
-                        if(useDb || !(useForm.author&&useForm.Name&&useForm.description&&useForm.projectLink&&useFile)) return;
-                        
-                        if(!isValidURL(useForm.projectLink)) {
-                            setRes("Invalid project url!"); 
-                            return;
-                        }
-
-                        setDb(true);
-
-                        const res = await uploadProject(useForm, useFile!);
-
-                        setRes(res);
-
-                        setForm(initialState);
-                        setFile(null);
-
-                        setDb(false);
-                    })();
-                    
-                }}>Submit</ShadeButton>
+                <ShadeButton type="submit" disabled={useDb} shade={true} changeShadeOnHover>Submit</ShadeButton>
                 {useRes && <p className="text-2xl text-red-400 italic">{useRes}</p>}
             </form>
 

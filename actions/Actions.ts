@@ -4,15 +4,16 @@ import { ProjectProps } from "@/util/Project";
 import { S3Client, ListObjectsCommand } from "@aws-sdk/client-s3";
 
 
+
 export async function getProjects(): Promise<ProjectProps[]>
 {
-    return fetch(process.env.MONGO_DB_URL!, {
+    return fetch(process.env.DYNAMO_DB_URL!, {
         method: "POST",
-        body: "{\"Action\" : \"Access\"}"
+        body: JSON.stringify({ action: "access" })
     })
     .then(
         response=>{
-            // console.log(response);
+            console.log(response);
             if(response.ok)
                 return response.json()
         }
@@ -21,8 +22,8 @@ export async function getProjects(): Promise<ProjectProps[]>
         json => {
             
             // console.log(json);
-          
-            const projects = json.body as ProjectProps[];
+            console.log(json.body);
+            const projects = json as ProjectProps[];
             // return "D:"
 
             return projects.map(project=> {
@@ -31,6 +32,8 @@ export async function getProjects(): Promise<ProjectProps[]>
                     "imageLink": `${process.env.S3_BUCKET_URL!}${project.imageLink}`
                 }
             });
+
+            // return [];
         }
     )
     .catch(
@@ -47,10 +50,10 @@ export async function uploadProject(project: BaseProject, imageFile: File): Prom
 
     // return `Image Link: ${imageLink}`
 
-    return fetch(process.env.MONGO_DB_URL!, {
+    return fetch(process.env.DYNAMO_DB_URL!, {
         method: "POST",
         body: JSON.stringify({
-            "Action": "Add",
+            "action": "add",
             "Name": project.Name,
             "author": project.author,
             "description": project.description,
@@ -59,11 +62,15 @@ export async function uploadProject(project: BaseProject, imageFile: File): Prom
         })
 
     }).then(res=>{
-        if(!res.ok) return null;
+        console.log(res);
+        if(!res.ok)
+        {
+            return { message : "An error occurred!" };
+        }
 
         return res.json();
-    }).then(data=>JSON.parse(data)["body"])
-    .catch(()=>null);
+    }).then(data=>data.body)
+    .catch((e)=>`An error occured! ${e}`);
 }
 
 interface RequestUrl {
@@ -97,7 +104,7 @@ export async function uploadImage(file: File)
 }
 
 const s3 = new S3Client({
-    region: "us-east-2",
+    region: process.env.AWS_REGION,
     credentials: 
     {
         accessKeyId: process.env.GALLERY_ACCESS_KEY_ID!,
