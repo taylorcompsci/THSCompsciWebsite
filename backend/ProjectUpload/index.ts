@@ -78,9 +78,14 @@ export const lambda_function: APIGatewayProxyHandler = async (event, context) =>
 {
     try
     {   
-        const body = JSON.parse(event.body || "{}") || {};
+        console.log(`Request:${JSON.stringify(event)}`);
+        
+        const jsonEvent: any = typeof event.body == "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
 
-        console.log(`[${context.logStreamName}] Handling event: ${JSON.stringify(body)}`);
+        if(!jsonEvent.success)
+            return response(400, { message: "Invalid JSON"});
+
+        const body = jsonEvent.res ?? {};
 
         const payload = actionSchema.safeParse(body);
 
@@ -100,4 +105,18 @@ export const lambda_function: APIGatewayProxyHandler = async (event, context) =>
     }
 
     return response(500, "Oops. Something broke.");
+}
+
+function validate_json(s: string): { res: any, success: boolean}
+{
+    try
+    {
+        const body = JSON.parse(s);
+
+        return { res: body, success: true};
+    }
+    catch(err)
+    {
+        return { res: {}, success: false}
+    }
 }

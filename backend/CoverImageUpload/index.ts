@@ -1,7 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import {z} from "zod";
+import {success, z} from "zod";
 
 const URL_EXPIRATION_SECONDS = 300;
 
@@ -65,7 +65,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event) => {
     {
         console.log(`Request:${JSON.stringify(event)}`);
         
-        const jsonEvent = validate_json(event.body ?? "{}");
+        const jsonEvent: any = typeof event.body == "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
 
         if(!jsonEvent.success)
             return response(400, { message: "Invalid JSON"});
