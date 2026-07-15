@@ -39,7 +39,7 @@ jobs:
         working-directory: ${{ matrix.function.path }}
 
       - name: Bundle ${{ matrix.function.name }}
-        run: npx esbuild ${{ matrix.function.entry }} --bundle --minify --platform=node --target=node24 --outfile=dist/index.js
+        run: npx esbuild ${{ matrix.function.entry }} --bundle --minify=false --sourcemap --keep-names --platform=node --target=node24 --outfile=dist/index.js
         working-directory: ${{matrix.function.path}}
         
       - name: Zip ${{ matrix.function.name }}
