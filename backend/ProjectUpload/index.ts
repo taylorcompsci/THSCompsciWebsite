@@ -78,7 +78,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event, context) =>
 {
     try
     {   
-        const body = JSON.parse(event.body ?? "{}");
+        const body = JSON.parse(event.body || "{}") || {};
 
         console.log(`[${context.logStreamName}] Handling event: ${JSON.stringify(body)}`);
 
@@ -95,6 +95,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event, context) =>
     }
     catch (err)
     {
+        console.log(err);
         return response(500, "Something unexpected happened while handling payload! Please contact the server admin.")
     }
 
