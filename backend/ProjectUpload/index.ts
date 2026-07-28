@@ -40,7 +40,6 @@ async function accessAll()
     );
     const unfilteredItems = Items?.map(item=>insertSchema.safeParse(item)) ?? [];
 
-    console.log(unfilteredItems);
 
     return response(200, unfilteredItems.filter(item=> item.success).map(item => item.data));
 }

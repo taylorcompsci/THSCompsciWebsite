@@ -50,7 +50,7 @@ async function getUploadUrl(event: any)
         ContentType: parsedEvent.data.type
     };
 
-    console.log(`S3 Params for uploading cover: ${JSON.stringify(s3Params)}`);
+    // console.log(`S3 Params for uploading cover: ${JSON.stringify(s3Params)}`);
 
     const putCommand = new PutObjectCommand(s3Params);
 
@@ -62,9 +62,7 @@ async function getUploadUrl(event: any)
 
 export const lambda_function: APIGatewayProxyHandler = async (event) => {
     try
-    {
-        console.log(`Request:${JSON.stringify(event)}`);
-        
+    {        
         const jsonEvent: any = typeof event.body == "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
 
         if(!jsonEvent.success)

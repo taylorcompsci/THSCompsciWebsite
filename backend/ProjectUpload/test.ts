@@ -14,7 +14,6 @@ async function main()
         {} as any,
         () => {}
     );
-    console.log(result);
 }
 
 main();
