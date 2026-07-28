@@ -7,8 +7,6 @@ import Image from "next/image";
 import Scroll from "@/util/Scroll";
 import { fetchGalleryImages } from "@/actions/Actions";
 
-import { shuffle } from "@/util/Util";
-import { threshold } from "three/src/nodes/TSL.js";
 
 export default function Gallery()
 {
@@ -18,21 +16,22 @@ export default function Gallery()
     const [ useFiles, setFiles ] = useState<string[]>([]);
     const [ useErrorMessage, setErrorMessage] = useState<string|undefined>();
     
-    let prevToken: string | undefined = undefined;
-
+    
     const triggerRef: RefObject<HTMLDivElement | null> = useRef(null);
     
     useEffect(()=>{
-
-
+        
+        
         if(triggerRef.current)
         {
+            let prevToken: string | undefined = undefined;
+            
             const observer = new IntersectionObserver(async ()=>{
                 
                 if(prevToken == "-1")
                     return;
                 
-                const result = await fetchGalleryImages(prevToken);
+                const result = (await fetchGalleryImages(prevToken).catch((e)=> setErrorMessage(e)))!;
 
                 if(result.contents)
                     setFiles(e => [...e, ...result.contents!]);

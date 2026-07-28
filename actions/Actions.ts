@@ -1,7 +1,7 @@
 "use server"
 
 import { ProjectProps } from "@/util/Project";
-import { S3Client, ListObjectsCommand, paginateListObjectsV2 } from "@aws-sdk/client-s3";
+import { S3Client, paginateListObjectsV2 } from "@aws-sdk/client-s3";
 
 
 

@@ -1,7 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import {success, z} from "zod";
+import {z} from "zod";
 
 const URL_EXPIRATION_SECONDS = 300;
 
