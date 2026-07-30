@@ -86,3 +86,19 @@
     
 
 }
+
+.react-calendar__month-view__days
+{
+  all: unset;
+  @apply bg-red-400 grid grid-rows-7 grid-cols-7 grid-cols-;
+}
+
+.react-calendar__tile
+{
+  font-size: unset;
+}
+
+.calendar-tile
+{
+  @apply border border-white size-16 max-w-16;
+}
