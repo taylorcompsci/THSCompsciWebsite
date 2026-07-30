@@ -1,8 +1,10 @@
-import { redirect } from "next/navigation";
+import EventCalendar from "@/util/About/EventCalendar";
 
 export default function About()
 {
-    //This is in progress. Redirects to Home page.
-
-    redirect("/");
+    return (
+        <div className="mt-10">
+            <EventCalendar/>
+        </div>
+    );
 }
