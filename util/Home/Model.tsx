@@ -6,6 +6,7 @@ import { Canvas, ThreeElements, useFrame, useThree } from '@react-three/fiber'
 import { Center, useGLTF } from '@react-three/drei'
 import {  OrbitControls } from "@react-three/drei";
 import { EffectComposer, RenderPass, EffectPass, ASCIIEffect, ASCIITexture, BlendFunction } from "postprocessing";
+import clsx from "clsx";
 
 useGLTF.preload("/assets/logo.glb");
 
@@ -75,12 +76,15 @@ function Logo(props: ThreeElements['group']) {
     );
 }
 
-export default function Model()
+type ModelProps = {
+    className? : string
+}
+export default function Model({ className }: ModelProps)
 {
 
 
     return (
-        <div className="size-150 touch-auto">
+        <div className={clsx(className, "size-150 touch-auto")}>
             <Canvas>
                 <Logo/>
             </Canvas>

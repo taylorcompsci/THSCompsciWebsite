@@ -4,7 +4,7 @@ import Command from "@/util/Home/Command";
 import FeatureBox from "@/util/Home/FeatureBox";
 import Scroll from "@/util/Scroll";
 
-import { Discord, Joystick, Medal } from "@boxicons/react";
+import { Brain, Joystick, Medal } from "@boxicons/react";
 
 import Model from "@/util/Home/Model";
 import Question from "@/util/Home/Question";
@@ -76,7 +76,7 @@ export default function Home() {
 
                     <div className="flex gap-x-10 mt-10 flex-wrap max-md:flex-col gap-y-5">
                       <FeatureBox title="Competitions" description={"Competitions are a great way to build upon your problem solving skills! Contests are also a decent way to apply the things you've learned in CSA and CS3."} icon={Medal}/>
-                      <FeatureBox title="Active Discord Server" description="We have a Discord server consisting of 100+ members! On there, you can ask questions about CS, show off your projects, and socialize with a great group of people. We also host game nights on there every once a while." route="https://discord.com/invite/GMQvwGryHg" icon={Discord}/>
+                      <FeatureBox title="CSHS" description="New this year is our CS Honor Society! This is an extension of the CS Club dedicated to service and building! Throughout the year, students will use their CS skills to provide service to the community. In addition, students will learn how to build and maintain real-world applications through our service projects!" route="/CSHS" icon={Brain}/>
                       <FeatureBox title="Projects" description="We encourage people to start building their own projects, mainly through our gamejams! Go check out our projects page to see all the things our members have built!" icon={Joystick}/>
                     </div>
                 </div>  
@@ -124,7 +124,7 @@ export default function Home() {
             {
               commandFinished["faq"] && (
                 <Scroll className="flex flex-wrap gap-x-5 gap-y-5 pt-5 w-[70%] max-md:w-full max-md:flex-col max-md:items-center">
-                  <Question question="Are there fees for the Computer Science Club?" answer="Our club will always be free!"/>
+                  <Question question="Are there fees for the Computer Science Club?" answer="Our club will always be free! However, the CSHS does require an annual membership fee. If there are issues with affordability, please reach out to us and we can reduce/cover the fee."/>
                   <Question question="How much computer science do I need to know to join?" answer="You can join the club even if you don't any programming! However, to attend competitions and actively participate in our projects/activities, we recommend you take CSA (or learn the basics of the Java Programming Language)."/>
                   <Question question="When are the meetings?" answer="We generally meet at the beginning of every month (always on a Wednesday) in Mr. Beck's room (room #1940). To stay notified, please either follow our Instagram or join our Remind/Discord."/>
                   <Question question="I would like to show off some of my projects! Where can I do that?" answer="We showcase all of our member projects on our project page! On the page, there will be a link where you can submit your projects."/>
