@@ -87,10 +87,15 @@
 
 }
 
+.react-calendar, .react-calendar__month-view__days, .react-calendar__viewContainer
+{
+  @apply size-fit;
+}
+
 .react-calendar__month-view__days
 {
-  all: unset;
-  @apply bg-red-400 grid grid-rows-7 grid-cols-7 grid-cols-;
+  display: grid !important;
+  @apply bg-red-400 grid grid-rows-5 grid-cols-7 h-fit gap-0 w-150;
 }
 
 .react-calendar__tile
@@ -100,5 +105,5 @@
 
 .calendar-tile
 {
-  @apply border border-white size-16 max-w-16;
+  @apply border border-white aspect-square w-full flex p-2;
 }
