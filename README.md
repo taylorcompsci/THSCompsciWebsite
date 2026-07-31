@@ -8,3 +8,4 @@
 - ## Add Project of the Week
 - ## Integrate Google Calendar
 - ## Create CSHS Page
+- ## Create About Page
