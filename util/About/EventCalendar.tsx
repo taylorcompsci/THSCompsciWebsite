@@ -1,8 +1,9 @@
 "use client"
 
 import Calendar, { TileArgs } from "react-calendar";
-import { useEffect, useState } from "react";
-import { getCalendarEntries, type CalendarEntry } from "@/actions/CalendarAction";
+import { useState, useEffect } from "react";
+
+import { type CalendarEntry, getCalendarEntries } from "@/actions/CalendarAction";
 
 function tileContent({view, date}: TileArgs)
 {

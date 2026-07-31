@@ -105,5 +105,5 @@
 
 .calendar-tile
 {
-  @apply border border-white aspect-square w-full flex p-2;
+  @apply border border-white size-16 max-w-16;
 }
