@@ -21,7 +21,7 @@ const FEATURED_PROJECTS: string[] = ["Chess", "Gordle", "Plinko: Win at Life"];
 
 export default function Home() {
 
-  const [ commandFinished, setCommandFinished ] = useState<{ [key: string]: boolean}>({});
+  const [ commandFinished, setCommandFinished ] = useState<{ [key: string]: boolean}>({ start: true });
   const [ useShade, setShade ] = useState<boolean>(false);
   const [ useProjects, setProjects ] = useState<ProjectProps[]>();
 
@@ -30,21 +30,10 @@ export default function Home() {
   }, [])
 
   return (
-    <main className={clsx("ml-5 max-md:ml-0 mt-5",
+    <main className={clsx(
       !commandFinished["start"] && "h-[500vh]"
 
     )}>
-      <div className="text-2xl max-md:pl-3">
-        <p>THS CMD</p>
-        <p>Copyright THS Club. All rights reserved</p>
-      </div>
-      <br/>
-      <Command text="cat home.txt" callback={()=>{ 
-        setCommandFinished({
-          ...commandFinished,
-          "start": true
-        })
-      }}/>
 
      {commandFinished["start"] && 
      <Scroll className="flex max-md:flex-col-reverse items-center justify-between -mt-5">

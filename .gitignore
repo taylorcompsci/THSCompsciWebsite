@@ -48,3 +48,4 @@ amplifyconfiguration*
 
 /backend/CoverImageUpload/node_modules
 /backend/ProjectUpload/node_modules
+/backend/Blog/node_modules

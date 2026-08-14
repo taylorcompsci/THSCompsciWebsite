@@ -1,5 +1,9 @@
 @import "tailwindcss";
+@source "../node_modules/streamdown/dist/*.js";
+@source "../node_modules/@streamdown/code/dist/*.js";
+@source "../node_modules/@streamdown/math/dist/*.js";
 
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --color-background: #000000;
   --color-header: #202020;
@@ -67,13 +71,14 @@
     :root, html {
       font-size: 1.2vw;
       color: white;
+      color-scheme: dark;
     }
     
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      
+      color-scheme: dark;
     }
     
     @media screen and  (max-width: 768px) {
@@ -86,3 +91,9 @@
     
 
 }
+.dark [data-streamdown='code-block-body'] code span {
+  color: var(--shiki-dark, inherit) !important;
+  background-color: var(--shiki-dark-bg, transparent) !important;
+}
+
+

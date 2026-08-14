@@ -36,6 +36,7 @@ export default function Navbar()
                 <NavBTN text="Officers" route="officers" unset={()=>setMenu(false)}/>
                 <NavBTN text="Resources" route="competitions" unset={()=>setMenu(false)}/>
                 <NavBTN text="Projects" route="projects" unset={()=>setMenu(false)}/>
+                <NavBTN text="Blog" route="blog" unset={()=>setMenu(false)}/>
             </div>
             
             <div className="hidden max-md:flex justify-end pr" onClick={()=>setMenu(prev=>!prev)}>
