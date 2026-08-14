@@ -2,14 +2,19 @@
 
 import ShadeButton from "@/util/ShadeButton";
 import { redirect } from "next/navigation";
+import Model from "@/util/Home/Model";
+import { usePathname } from "next/navigation";
 
 export default function notFound()
 {
+    const pathname = usePathname();
+
     return (
-        <div className="flex flex-col items-center gap-4">
-            
+        <div className="flex flex-col items-center gap-4 justify-center h-full mt-20">
+            {/* <Model className="size-30"/> */}
             <h1 className="text-7xl">404 Not Found</h1>
-            <ShadeButton changeShadeOnHover onClick={()=> redirect("/")}>Home</ShadeButton>
+            <p className="text-3xl">We don't know what {pathname} is...</p>
+            <ShadeButton changeShadeOnHover onClick={()=> redirect("/")} center>Take me back!</ShadeButton>
         </div>
     )
 
