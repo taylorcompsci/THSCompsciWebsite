@@ -20,8 +20,8 @@ export default function Command({ text, callback }: { text: string , callback?: 
     return (
         <>
             <div className="flex gap-x-1.5 h-8 max-md:pl-3">
-                <p className="text-2xl">{`PS C://THS_WEBSITE/${path.substring(1)||"HOME"} > `}</p>
-                <p className="text-2xl typewriter" onAnimationEnd={()=>{
+                <p className="text-2xl max-md:text-lg">{`PS C://THS_WEBSITE/${path.substring(1)||"HOME"} > `}</p>
+                <p className="text-2xl max-md:text-lg typewriter" onAnimationEnd={()=>{
                     callback?.();
                 }}>{text}</p>
             </div>
@@ -36,7 +36,7 @@ export function RootCommand({ callback }: { callback?: ()=>void})
 
     return (
         <>
-         <div className="text-2xl max-md:pl-3">
+         <div className="text-2xl max-md:pl-3 max-md:text-lg">
             <p>THS CMD</p>
             <p>Copyright THS Club. All rights reserved</p>
         </div>

@@ -6,7 +6,7 @@ export default function BlogPostOverview(props: BlogPost)
 {
     return (
         <div className="pl-6 w-[70%] md:w-[50%] cursor-pointe transition-all hover:ml-3 cursor-pointer group" onClick={()=>redirect(`/blog/${props.id}`)}>
-            <p className="text-gray-500 text-xl transition-colors group-hover:text-white">{`~/posts/${props.title.replaceAll(/\s/g, "-").toLowerCase()}.md`}</p>
+            <p className="text-gray-500 text-xl transition-colors group-hover:text-white">{`D://posts/${props.title.replaceAll(/\s/g, "-").toLowerCase()}.md`}</p>
             <div className="py-3 flex gap-6 border-b border-gray-500 transition-colors group-hover:border-white">
                 <Image src={`${props.thumbnail_url}`} 
                     unoptimized alt={props.description} 
@@ -20,7 +20,7 @@ export default function BlogPostOverview(props: BlogPost)
                 </div>
             </div>
             <div className="mt-4 flex justify-between">
-                <div className="flex gap-3">
+                <div className="flex gap-3 has-[.PROFILE:hover]:pb-10 transition-all">
                     {props.authors.map(author=><Profile name={author} key={author}/>)}
                 </div>
                 <p className="text-lg text-gray-500 transition-colors group-hover:text-white">{`${props.created_at.getUTCFullYear()}-${(props.created_at.getUTCMonth()+1).toString().padStart(2,"0")}-${props.created_at.getUTCDate().toString().padStart(2, "0")}`}</p>
@@ -34,7 +34,7 @@ export function Profile({ name }: {name : string})
     return (
         <div 
             className="border border-gray-500 
-            size-8
+            size-8 PROFILE
             items-center justify-center 
             flex rounded-full transition-all 
             group-hover:border-white group/profile relative hover:mr-32"

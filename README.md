@@ -1,10 +1,10 @@
 # Roadmap
-- ##  Add Schema validation through zod for project creation.
+- ## Add Schema validation through zod for project creation.
 - ##  Make officer page dynamic.
 - ## Update resource page.
 - ## Allow outside contributors from the club for this repo.
 - ## Maybe a blog? That would be kind of cool.
-- ## Fix IsValidURL
+- ## ~~Fix IsValidURL~~
 - ## Add Project of the Week
 - ## Integrate Google Calendar
 - ## Create CSHS Page

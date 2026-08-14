@@ -15,7 +15,7 @@ export default function Blog()
     }, [])
 
     return (
-        <div className="flex flex-col gap-15">
+        <div className="flex flex-col gap-5 mt-5">
             { useBlogPosts?.map(post => <BlogPostOverview key={post.id} {...post}/>)}
         </div>
     )
