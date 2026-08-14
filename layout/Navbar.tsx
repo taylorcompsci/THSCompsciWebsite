@@ -25,7 +25,7 @@ export default function Navbar()
 
     return (
         <nav className="bg-header flex items-center justify-between md:pl-3 h-12 max-md:h-18 max-md:justify-center max-md:flex-col-reverse max-md:items-end overflow-y-visibleI">
-            <h1 className="text-white text-2xl max-md:hidden">THS COMPSCI</h1>
+            <Link className="text-white text-2xl max-md:hidden transition-colors hover:text-gray-300 cursor-pointer select-none" href="/">THS COMPSCI</Link>
             
             <div className={clsx("h-full flex items-end max-md:flex-col max-md:items-start max-md:z-100 transition-all", useMenu || "max-md:opacity-0 max-md:pointer-events-none",
                 "max-md:w-full max-md:h-screen max-md:fixed max-md:top-18 max-md:bg-background", !useMenu || "max-md:opacity-76" 

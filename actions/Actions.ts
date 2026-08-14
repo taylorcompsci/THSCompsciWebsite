@@ -1,7 +1,7 @@
 "use server"
 
 import { ProjectProps } from "@/util/Project";
-import { S3Client, ListObjectsCommand } from "@aws-sdk/client-s3";
+import { S3Client, paginateListObjectsV2 } from "@aws-sdk/client-s3";
 
 
 
@@ -13,7 +13,6 @@ export async function getProjects(): Promise<ProjectProps[]>
     })
     .then(
         response=>{
-            console.log(response);
             if(response.ok)
                 return response.json()
         }
@@ -21,7 +20,6 @@ export async function getProjects(): Promise<ProjectProps[]>
     .then(
         json => {
             
-            // console.log(json);
             console.log(json.body);
             const projects = json as ProjectProps[];
             // return "D:"
@@ -96,7 +94,7 @@ export async function uploadImage(file: File)
             headers: headers,
             body: file
         })
-        .then(()=>process.env.S3_BUCKET_URL+data.Key)
+        .then(()=>process.env.PROJECT_S3_BUCKET_URL+data.Key)
         .catch(()=>null);
 
         return photo;
@@ -112,24 +110,43 @@ const s3 = new S3Client({
     }
 });
 
-export async function fetchGalleryImages()
+
+const PAGINATION_LIMIT = 12;
+type GalleryResult = {
+    contents?: string[],
+    nextToken?: string,
+    isDone?: boolean
+}
+
+export async function fetchGalleryImages(continuationToken?: string): Promise<GalleryResult>
 {
-    const listCommand = new ListObjectsCommand({
-        Bucket: process.env.GALLERY_BUCKET,
-    })
-
-    try{
-
-        const output = (await s3.send(listCommand))
-        .Contents?.map(
-            content=>`https://${process.env.GALLERY_BUCKET}.s3.us-east-2.amazonaws.com/${content.Key}`
-        );
-    
-        return output;
-    }
-    catch
+    try
     {
-        throw new Error("Couldn't fetch Gallery images! Please try again later.");
-    }
+        const paginator = paginateListObjectsV2({ client: s3 }, {
+            Bucket: process.env.GALLERY_BUCKET,
+            MaxKeys: PAGINATION_LIMIT,
+            ContinuationToken: continuationToken
+        });
     
+        const { value: page, done } = await paginator.next();
+
+        if( done || !page )
+        {
+            return {
+                contents: [], isDone: true, nextToken: undefined
+            };
+        }
+
+        return {
+            contents: (page.Contents ?? []).map(e=>(process.env.GALLERY_BUCKET_URL! + (e["Key"] ?? "UNKNOWN"))),
+            nextToken: page.NextContinuationToken,
+            isDone: !page.IsTruncated
+        };
+    }
+    catch (e)
+    {
+        console.error(`[ERROR]: ${e}`)
+
+        throw new Error("An unexpected error happened while fetching gallery images. Please contact the server admin!");
+    }
 }
