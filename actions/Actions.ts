@@ -29,7 +29,7 @@ export async function getProjects(): Promise<ProjectProps[]>
             return projects.map(project=> {
                 return {
                     ...project,
-                    "imageLink": `${process.env.S3_BUCKET_URL!}${project.imageLink}`
+                    "imageLink": `${process.env.PROJECT_S3_BUCKET_URL!}${project.imageLink}`
                 }
             });
 

@@ -3,7 +3,7 @@
 - ##  Make officer page dynamic.
 - ## Update resource page.
 - ## Allow outside contributors from the club for this repo.
-- ## Maybe a blog? That would be kind of cool.
+- ## ~~Maybe a blog? That would be kind of cool.~~
 - ## ~~Fix IsValidURL~~
 - ## Add Project of the Week
 - ## Integrate Google Calendar
