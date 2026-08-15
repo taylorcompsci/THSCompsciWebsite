@@ -12,7 +12,7 @@ interface generateMetadataProps
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata({ params, searchParams }: generateMetadataProps, parent: ResolvingMetadata): Promise<Metadata>
+export async function generateMetadata({ params }: generateMetadataProps, _parent: ResolvingMetadata): Promise<Metadata>
 {
     const { slug } = await params;
 

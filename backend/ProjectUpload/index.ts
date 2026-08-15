@@ -101,7 +101,8 @@ export const lambda_function: APIGatewayProxyHandler = async (event) =>
 
     }
     catch (err)
-    {
+    {   
+        console.error(`[LAMBDA ERROR]: ${err}`)
         return response(500, "Something unexpected happened while handling payload! Please contact the server admin.")
     }
 
