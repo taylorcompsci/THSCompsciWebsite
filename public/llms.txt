@@ -1,0 +1,15 @@
+# THS Computer Science Club
+
+> The Computer Science Club at James E. Taylor High School (JET), creating the next generation of coders.
+
+## Pages
+- [Home](https://thscompsci.com/): Overview and social links
+- [Projects](https://thscompsci.com/projects): Student and club projects
+- [Gallery](https://thscompsci.com/gallery): Photos from club events
+- [Officers](https://thscompsci.com/officers): Current club leadership
+- [Resources](https://thscompsci.com/competitions): Competition and learning resources
+- [Blog](https://thscompsci.com/blog): Blog Posts made by members of the THS CS Club!
+
+## Contact
+- Instagram: https://www.instagram.com/jetcompsci/
+- Discord: https://discord.com/invite/GMQvwGryHg/
