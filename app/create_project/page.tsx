@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, HTMLProps } from "react"
+import { useState, type HTMLProps } from "react"
 import type { ProjectProps } from "@/util/Project";
 
 import { uploadProject } from "@/actions/Actions";

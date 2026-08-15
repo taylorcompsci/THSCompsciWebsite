@@ -1,9 +1,8 @@
-import { ConditionalCheckFailedException, DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, GetCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
-import {success, z} from "zod";
+import type { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
+import { z} from "zod";
 
 const BlogPostSchema = z.object({
     id: z.string(),
@@ -29,7 +28,7 @@ const CORS_HEADERS = {
 const dynamoDbClient = DynamoDBDocumentClient.from(new DynamoDBClient({region: process.env.AWS_REGION ?? "us-east-2"}));
 const dbTable = process.env.DYNAMO_DB_TABLE ?? "blog";
 
-const s3Client = new S3Client({ region: process.env.AWS_REGION!});
+// const s3Client = new S3Client({ region: process.env.AWS_REGION ?? "us-east-2"});
 
 function response(statusCode: number, body: unknown): APIGatewayProxyResult{
   return {
@@ -86,7 +85,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event) => {
     {
         console.log(`Request:${JSON.stringify(event)}`);
         
-        const jsonEvent: any = typeof event.body == "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
+        const jsonEvent = typeof event.body === "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
 
         if(!jsonEvent.success)
             return response(400, { message: "Invalid JSON"});
@@ -118,7 +117,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event) => {
     }
 }
 
-function validate_json(s: string): { res: any, success: boolean}
+function validate_json(s: string): { res: unknown, success: boolean}
 {
     try
     {
@@ -126,7 +125,7 @@ function validate_json(s: string): { res: any, success: boolean}
 
         return { res: body, success: true};
     }
-    catch(err)
+    catch(_err)
     {
         return { res: {}, success: false}
     }

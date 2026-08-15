@@ -2,16 +2,16 @@ import Image from "next/image"
 import Link from "next/link";
 
 import {Instagram, Github, Discord} from "@boxicons/react";
-import { BoxIconProps } from "@boxicons/react";
+import type { BoxIconProps } from "@boxicons/react";
 
-import { ForwardRefExoticComponent, RefAttributes } from "react";
+import type { ForwardRefExoticComponent, RefAttributes } from "react";
 import clsx from "clsx";
 
 interface OfficerProps
 {
     image: string,
     name: string,
-    role: string,
+    officer_role: string,
 
     background? : string,
 
@@ -34,7 +34,7 @@ export default function Officer(props : OfficerProps)
             <Image placeholder="blur" blurDataURL="/assets/placeholder.webp" unoptimized src={props.image} alt={`Picture of ${props.name}`} width={300} height={300} className="object-cover rounded-full size-25 border-2 ml-3 object-top border-white relative bottom-10"/>
             <div className="p-3 pt-0 -mt-8">
                 <h2 className="font-bold text-3xl">{props.name}</h2>
-                <p className="text-xl italic">{props.role}</p>
+                <p className="text-xl italic">{props.officer_role}</p>
                 
                 <div className="flex py-2 gap-1 text-md">
                     {

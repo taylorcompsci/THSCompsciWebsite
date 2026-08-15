@@ -3,7 +3,7 @@
 import Project from "@/util/Project";
 import Scroll from "@/util/Scroll";
 import { useEffect, useState } from "react";
-import { ProjectProps } from "@/util/Project";
+import type { ProjectProps } from "@/util/Project";
 import { getProjects } from "@/actions/Actions";
 import Link from "next/link";
 
@@ -31,7 +31,7 @@ export default function Projects()
             </div>
 
             <section className="grid grid-cols-3 max-md:grid-cols-1 items-stretch gap-5 flex-wrap mt-10">
-                {(Array.isArray(useProjects) ? useProjects : []).map((project, idx) => project.hide || <Project key={`${project.Name}-${idx}`} project={project}/>)}
+                {(Array.isArray(useProjects) ? useProjects : []).map((project) => project.hide || <Project key={`${project.Name}-${project.author}`} project={project}/>)}
             </section>
         </Scroll>
     )

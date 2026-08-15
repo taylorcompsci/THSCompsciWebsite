@@ -1,7 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
+import type { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import {success, z} from "zod";
+import { z } from "zod";
 
 const URL_EXPIRATION_SECONDS = 300;
 
@@ -22,7 +22,7 @@ const typeSchema = z.object({
     type: z.literal(Object.keys(TYPE_MAP), "Unsupported file type for cover!")
 });
 
-const s3Client = new S3Client({ region: process.env.AWS_REGION!});
+const s3Client = new S3Client({ region: process.env.AWS_REGION ?? "us-east-2"});
 
 function response(statusCode: number, body: unknown): APIGatewayProxyResult{
   return {
@@ -32,7 +32,7 @@ function response(statusCode: number, body: unknown): APIGatewayProxyResult{
   };
 }
 
-async function getUploadUrl(event: any)
+async function getUploadUrl(event: unknown)
 {
     const parsedEvent = typeSchema.safeParse(event);
 
@@ -45,7 +45,7 @@ async function getUploadUrl(event: any)
     const key = `${randomID}${fileType}`;
 
     const s3Params = {
-        Bucket: process.env.UPLOAD_BUCKET!,
+        Bucket: process.env.UPLOAD_BUCKET ?? "UNKNOWN UPLOAD_BUCKET",
         Key: key,
         ContentType: parsedEvent.data.type
     };
@@ -65,7 +65,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event) => {
     {
         console.log(`Request:${JSON.stringify(event)}`);
         
-        const jsonEvent: any = typeof event.body == "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
+        const jsonEvent = typeof event.body === "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
 
         if(!jsonEvent.success)
             return response(400, { message: "Invalid JSON"});
@@ -84,7 +84,7 @@ export const lambda_function: APIGatewayProxyHandler = async (event) => {
     }
 }
 
-function validate_json(s: string): { res: any, success: boolean}
+function validate_json(s: string): { res: unknown, success: boolean}
 {
     try
     {
@@ -92,7 +92,7 @@ function validate_json(s: string): { res: any, success: boolean}
 
         return { res: body, success: true};
     }
-    catch(err)
+    catch(_err)
     {
         return { res: {}, success: false}
     }

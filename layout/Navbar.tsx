@@ -39,11 +39,11 @@ export default function Navbar()
                 <NavBTN text="Blog" route="blog" unset={()=>setMenu(false)}/>
             </div>
             
-            <div className="hidden max-md:flex justify-end pr" onClick={()=>setMenu(prev=>!prev)}>
+            <button aria-label="Navigation Menu Popup" type="button" className="hidden max-md:flex justify-end pr cursor-pointer" onClick={()=>setMenu(prev=>!prev)}>
                 {
                     !useMenu && <Menu size="lg"/> || <X size="lg"/>
                 }
-            </div>
+            </button>
             
 
         </nav>

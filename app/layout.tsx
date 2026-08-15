@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import localfont from "next/font/local";
 import "./globals.css";
-import 'katex/dist/katex.min.css';
 
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
-import { CommandWrapper, RootCommand } from "@/util/Home/Command";
-import { ChildProcess } from "child_process";
+import { CommandWrapper } from "@/util/Home/Command";
 
 
 const scientifica = localfont({
@@ -32,9 +30,16 @@ const scientifica = localfont({
 export const metadata: Metadata = {
   title: "THS Computer Science",
   description: "Creating the next generation of coders!",
-  keywords: ["THS", "James E. Taylor High School", "JET", "THS COMPSCI", "JET COMPSCI", "THS Computer Science"],
+  keywords: ["THS", "James E. Taylor High School", "JET", "THS COMPSCI", "JET COMPSCI", "THS Computer Science", "thscompsci", "james e. taylor", "computer science club", "THS clubs"],
   icons: {
     icon: "/assets/favicon.ico"
+  },
+  openGraph: {
+    title: "THS Computer Science",
+    description: "Creating the next generation of coders!",
+    url: "https://www.thscompsci.com",
+    siteName: "THS Computer Science Club",
+    type: "website"
   }
 };
 

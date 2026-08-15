@@ -1,15 +1,19 @@
 "use client"
 
-import Calendar, { TileArgs } from "react-calendar";
+import Calendar, { type TileArgs } from "react-calendar";
 import { useState, useEffect } from "react";
 
 import { type CalendarEntry, getCalendarEntries } from "@/actions/CalendarAction";
+
+import "@/app/styles/calendarStyle.css";
+
 
 function tileContent({view, date}: TileArgs)
 {
     return (
         <div>
-            {/* TEST */}
+            {view}
+            {date.toISOString()}
         </div>
     )
 }
@@ -17,8 +21,8 @@ function tileContent({view, date}: TileArgs)
 export default function EventCalendar()
 {
 
-    const [ useDate, setDate ] = useState<Date>(new Date());
-    const [ useEntries, setEntries ] = useState<CalendarEntry[]>([]);
+    const [ _useDate, _setDate ] = useState<Date>(new Date());
+    const [ _useEntries, setEntries ] = useState<CalendarEntry[]>([]);
 
     useEffect(()=>{
         getCalendarEntries().then((events)=>{setEntries(events); console.log(events)}).catch(err=> { throw err})

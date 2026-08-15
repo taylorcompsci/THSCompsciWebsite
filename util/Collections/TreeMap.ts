@@ -49,15 +49,15 @@ class TreeNode<K extends Comparable<K>, V>
     }
 }
 
-class TreeMap<K extends Comparable<K>, V>
+class _TreeMap<K extends Comparable<K>, V>
 {
     root?: TreeNode<K,V>;
     size: number = 0;
 
-    constructor()
-    {
+    // constructor()
+    // {
     
-    }
+    // }
 
     put(key: K, value: V): V | undefined
     {
@@ -68,7 +68,7 @@ class TreeMap<K extends Comparable<K>, V>
             return undefined;
         }
 
-        const node = this.root!.assign(key, value);
+        const node = this.root?.assign(key, value);
 
         const prevValue = node?.value;
 
@@ -104,6 +104,4 @@ class TreeMap<K extends Comparable<K>, V>
         return undefined;
     }
 
-    getOrDefault()
-    
 }

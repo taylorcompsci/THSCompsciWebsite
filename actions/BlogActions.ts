@@ -2,9 +2,7 @@
 
 import { z } from "zod";
 
-const BLOG_API_URL: string = process.env.BLOG_API_GATEWAY!;
-
-console.log(BLOG_API_URL);
+const BLOG_API_URL: string = process.env.BLOG_API_GATEWAY ?? "UNKNOWN_BLOG_API_URL";
 
 const BlogPostSchema = z.object({
     id: z.string(),
@@ -79,7 +77,7 @@ export async function getPost(id: string): Promise<BlogPost | Message>
         })
     })
     
-    if(response.status == 404)
+    if(response.status === 404)
     {
         return { message: "Resource not found!", status: 404};
     }
@@ -88,8 +86,6 @@ export async function getPost(id: string): Promise<BlogPost | Message>
     
 
     const unparsedJSON = JSON.parse(await response.text());
-
-    console.log(unparsedJSON);
 
 
     const safeParse = BlogPostSchema.safeParse(unparsedJSON);

@@ -1,13 +1,13 @@
 "use server"
 
-import { ProjectProps } from "@/util/Project";
+import type { ProjectProps } from "@/util/Project";
 import { S3Client, paginateListObjectsV2 } from "@aws-sdk/client-s3";
 
 
 
 export async function getProjects(): Promise<ProjectProps[]>
 {
-    return fetch(process.env.DYNAMO_DB_URL!, {
+    return fetch(process.env.DYNAMO_DB_URL ?? "UNKNOWN DYNAMO_DB_URL", {
         method: "POST",
         body: JSON.stringify({ action: "access" })
     })
@@ -20,14 +20,13 @@ export async function getProjects(): Promise<ProjectProps[]>
     .then(
         json => {
             
-            console.log(json.body);
             const projects = json as ProjectProps[];
             // return "D:"
 
             return projects.map(project=> {
                 return {
                     ...project,
-                    "imageLink": `${process.env.PROJECT_S3_BUCKET_URL!}${project.imageLink}`
+                    "imageLink": `${process.env.PROJECT_S3_BUCKET_URL ?? "UNKNOWN PROJECT_S3_BUCKET_URL"}${project.imageLink}`
                 }
             });
 
@@ -48,7 +47,7 @@ export async function uploadProject(project: BaseProject, imageFile: File): Prom
 
     // return `Image Link: ${imageLink}`
 
-    return fetch(process.env.DYNAMO_DB_URL!, {
+    return fetch(process.env.DYNAMO_DB_URL ?? "UNKNOWN DYNAMO_DB_URL", {
         method: "POST",
         body: JSON.stringify({
             "action": "add",
@@ -60,7 +59,6 @@ export async function uploadProject(project: BaseProject, imageFile: File): Prom
         })
 
     }).then(res=>{
-        console.log(res);
         if(!res.ok)
         {
             return { message : "An error occurred!" };
@@ -78,7 +76,7 @@ interface RequestUrl {
 
 export async function uploadImage(file: File)
 {
-    return fetch(process.env.REQUEST_URL!, {
+    return fetch(process.env.REQUEST_URL ?? "UNKNOWN REQUEST_URL", {
         method: "POST",
         body: JSON.stringify({
             "type": file.type
@@ -105,8 +103,8 @@ const s3 = new S3Client({
     region: process.env.AWS_REGION,
     credentials: 
     {
-        accessKeyId: process.env.GALLERY_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.GALLERY_ACCESS_KEY!
+        accessKeyId: process.env.GALLERY_ACCESS_KEY_ID ?? "UNKNOWN GALLERY_ACCESS_KEY_ID",
+        secretAccessKey: process.env.GALLERY_ACCESS_KEY ?? "UNKNOWN GALLERY_ACCESS_KEY"
     }
 });
 
@@ -138,7 +136,7 @@ export async function fetchGalleryImages(continuationToken?: string): Promise<Ga
         }
 
         return {
-            contents: (page.Contents ?? []).map(e=>(process.env.GALLERY_BUCKET_URL! + (e["Key"] ?? "UNKNOWN"))),
+            contents: (page.Contents ?? []).map(e=>((process.env.GALLERY_BUCKET_URL ?? "UNKNOWN GALLERY_BUCKET_URL") + (e.Key ?? "UNKNOWN"))),
             nextToken: page.NextContinuationToken,
             isDone: !page.IsTruncated
         };

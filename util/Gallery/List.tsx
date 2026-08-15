@@ -1,7 +1,7 @@
 "use server"
 
-import { promises } from "fs";
-import path from "path"
+import { promises } from "node:fs";
+import path from "node:path"
 
 const fileRegex = /(.+\.(PNG|JPG|JPEG|WEBP))$/i;
 

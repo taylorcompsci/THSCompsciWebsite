@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useEffect, useRef } from "react";
+import type React from "react";
+import  { useEffect, useRef } from "react";
 
 interface ScrollProps extends React.HTMLProps<HTMLDivElement>
 {
@@ -24,7 +25,8 @@ export default function Scroll({ children, ...props }: ScrollProps)
             })
         }, { threshold: 0.001});
 
-        observer.observe(divElement.current!);
+        if(divElement.current)
+            observer.observe(divElement.current);
     }, []);
 
 

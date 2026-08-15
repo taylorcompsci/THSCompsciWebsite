@@ -1,6 +1,6 @@
 import { ConditionalCheckFailedException, DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
-import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
+import type { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import {z as zod} from "zod";
 //CORS_HHEADERS
 const CORS_HEADERS = {
@@ -44,16 +44,16 @@ async function accessAll()
     return response(200, unfilteredItems.filter(item=> item.success).map(item => item.data));
 }
 
-async function addToDatabase(event: any)
+async function addToDatabase(event: unknown)
 {
-    let databasePayload = insertSchema.safeParse(event);
+    const databasePayload = insertSchema.safeParse(event);
 
     if(!databasePayload.success)
         return response(400,databasePayload.error.flatten().fieldErrors);
 
     try
     {
-        let result = await dynamoDbClient.send(
+        const _ = await dynamoDbClient.send(
             new PutCommand({
                 TableName: dynamoDbTable,
                 Item: { ...databasePayload.data},
@@ -76,13 +76,13 @@ async function addToDatabase(event: any)
     }
 }
 
-export const lambda_function: APIGatewayProxyHandler = async (event, context) => 
+export const lambda_function: APIGatewayProxyHandler = async (event) => 
 {
     try
     {   
         console.log(`Request:${JSON.stringify(event)}`);
         
-        const jsonEvent: any = typeof event.body == "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
+        const jsonEvent = typeof event.body === "string" ? validate_json(event.body ?? "{}") : {res: event.body, success: true};
 
         if(!jsonEvent.success)
             return response(400, { message: "Invalid JSON"});
@@ -94,22 +94,21 @@ export const lambda_function: APIGatewayProxyHandler = async (event, context) =>
         if(!payload.success)
             return response(400, payload.error.flatten().fieldErrors)
 
-        if(payload.data.action == "access")
+        if(payload.data.action === "access")
             return await accessAll();
-        else if(payload.data.action == "add")
+        else if(payload.data.action === "add")
             return await addToDatabase(body);
 
     }
     catch (err)
     {
-        console.log(err);
         return response(500, "Something unexpected happened while handling payload! Please contact the server admin.")
     }
 
     return response(500, "Oops. Something broke.");
 }
 
-function validate_json(s: string): { res: any, success: boolean}
+function validate_json(s: string): { res: unknown, success: boolean}
 {
     try
     {
@@ -117,7 +116,7 @@ function validate_json(s: string): { res: any, success: boolean}
 
         return { res: body, success: true};
     }
-    catch(err)
+    catch(_err)
     {
         return { res: {}, success: false}
     }

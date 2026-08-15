@@ -10,8 +10,9 @@ export default function Blog()
     const [ useBlogPosts, setBlogPosts ] = useState<BlogPost[] | undefined>();
     
     useEffect(()=>{
-        fetchBlogPosts()
-        .then(e=>setBlogPosts(e))
+        if(!useBlogPosts)
+            fetchBlogPosts()
+            .then(e=>setBlogPosts(e))
     }, [])
 
     return (

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 import { Streamdown, defaultRehypePlugins } from "streamdown";
@@ -6,6 +5,9 @@ import { harden } from "rehype-harden";
 
 import { code } from "@streamdown/code";
 import { math } from "@streamdown/math";
+
+import 'katex/dist/katex.min.css';
+import "@/app/styles/rendererStyle.css";
 
 interface MarkdownRendererProps
 {
@@ -42,7 +44,7 @@ export default function MarkdownRenderer({ children, imageURL, ...props }: Markd
             ],
         ]}
         components={{
-            img: ({ src, alt, width, height}) => <Image placeholder="blur" blurDataURL="/assets/placeholder.webp" width={Number.parseInt((width?? 1200).toString())} height={Number.parseInt((height ?? 630).toString())} unoptimized src={normalizeAssetUrl(src?.toString())} alt={alt ?? "Unknown"} className="object-cover border-white"/>,
+            img: ({ src, alt, width, height}) => <Image placeholder="blur" blurDataURL="/assets/placeholder.webp" width={Number.parseInt((width?? 1200).toString(), 10)} height={Number.parseInt((height ?? 630).toString(), 10)} unoptimized src={normalizeAssetUrl(src?.toString())} alt={alt ?? "Unknown"} className="object-cover border-white"/>,
         }} 
         plugins={{ code: code, math: math}}
         >

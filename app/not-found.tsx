@@ -2,10 +2,10 @@
 
 import ShadeButton from "@/util/ShadeButton";
 import { redirect } from "next/navigation";
-import Model from "@/util/Home/Model";
+// import Model from "@/util/Home/Model";
 import { usePathname } from "next/navigation";
 
-export default function notFound()
+export default function NotFound()
 {
     const pathname = usePathname();
 

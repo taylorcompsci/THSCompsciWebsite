@@ -1,9 +1,5 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
-@source "../node_modules/streamdown/dist/*.js";
-@source "../node_modules/@streamdown/code/dist/*.js";
-@source "../node_modules/@streamdown/math/dist/*.js";
 
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
@@ -93,30 +89,10 @@
     
 
 }
-.dark [data-streamdown='code-block-body'] code span {
+/* .dark [data-streamdown='code-block-body'] code span {
   color: var(--shiki-dark, inherit) !important;
   background-color: var(--shiki-dark-bg, transparent) !important;
 }
+ */
 
 
-
-.react-calendar, .react-calendar__month-view__days, .react-calendar__viewContainer
-{
-  @apply size-fit;
-}
-
-.react-calendar__month-view__days
-{
-  display: grid !important;
-  @apply bg-red-400 grid grid-rows-5 grid-cols-7 h-fit gap-0 w-150;
-}
-
-.react-calendar__tile
-{
-  font-size: unset;
-}
-
-.calendar-tile
-{
-  @apply border border-white size-16 max-w-16;
-}

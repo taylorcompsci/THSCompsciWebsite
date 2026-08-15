@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent, RefAttributes } from "react";
-import { BoxIconProps } from "@boxicons/react";
+import type { ForwardRefExoticComponent, RefAttributes } from "react";
+import type { BoxIconProps } from "@boxicons/react";
 import Link from "next/link";
 
 type IconType = ForwardRefExoticComponent<BoxIconProps & RefAttributes<SVGSVGElement>>;

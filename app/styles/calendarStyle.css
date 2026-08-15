@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+.react-calendar, .react-calendar__month-view__days, .react-calendar__viewContainer
+{
+  @apply size-fit;
+}
+
+.react-calendar__month-view__days
+{
+  display: grid;
+  @apply bg-red-400 grid grid-rows-5 grid-cols-7 h-fit gap-0 w-150;
+}
+
+.react-calendar__tile
+{
+  font-size: unset;
+}
+
+.calendar-tile
+{
+  @apply border border-white size-16 max-w-16;
+}

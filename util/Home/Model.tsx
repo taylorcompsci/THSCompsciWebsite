@@ -1,8 +1,8 @@
 "use client"
 
-import * as THREE from "three";
+import type * as THREE from "three";
 import { useEffect, useRef } from 'react'
-import { Canvas, ThreeElements, useFrame, useThree } from '@react-three/fiber'
+import  { Canvas, type ThreeElements, useFrame, useThree } from '@react-three/fiber'
 import { Center, useGLTF } from '@react-three/drei'
 import {  OrbitControls } from "@react-three/drei";
 import { EffectComposer, RenderPass, EffectPass, ASCIIEffect, ASCIITexture, BlendFunction } from "postprocessing";
@@ -11,7 +11,7 @@ import clsx from "clsx";
 useGLTF.preload("/assets/logo.glb");
 
 function Logo(props: ThreeElements['group']) {
-    const { scene, camera, gl} = useThree();
+    const { scene, camera, gl, size} = useThree();
     
     const composerRef = useRef<EffectComposer|null>(null);
 
@@ -48,8 +48,16 @@ function Logo(props: ThreeElements['group']) {
         )
 
         compos.addPass(asciiPass);
+
+        return () => {
+            compos.dispose();
+        }
     
     }, [camera, gl, scene]);
+
+    useEffect(()=> {
+        composerRef.current?.setSize(size.width, size.height);
+    }, [size]);
 
     useFrame(()=>{
         if(composerRef.current)

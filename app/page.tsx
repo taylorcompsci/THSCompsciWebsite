@@ -8,7 +8,7 @@ import { Brain, Joystick, Medal } from "@boxicons/react";
 
 import Model from "@/util/Home/Model";
 import Question from "@/util/Home/Question";
-import Project, { ProjectProps } from "@/util/Project";
+import Project, { type ProjectProps } from "@/util/Project";
 import ShadeButton from "@/util/ShadeButton";
 import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -26,29 +26,29 @@ export default function Home() {
   const [ useProjects, setProjects ] = useState<ProjectProps[]>();
 
   useEffect(()=>{
-    getProjects().then(arr=> arr && arr instanceof Array && setProjects(arr.filter(proj=>proj && FEATURED_PROJECTS.includes(proj.Name))));
+    getProjects().then(arr=> arr && Array.isArray(arr) && setProjects(arr.filter(proj=>proj && FEATURED_PROJECTS.includes(proj.Name))));
   }, [])
 
   return (
-    <main className={clsx(
-      !commandFinished["start"] && "h-[500vh]"
+    <section className={clsx(
+      !commandFinished.start && "h-[500vh]"
 
     )}>
 
-     {commandFinished["start"] && 
+     {commandFinished.start && 
      <Scroll className="flex max-md:flex-col-reverse items-center justify-between -mt-5">
         <div className="w-[50%] max-md:w-[80vw] max-md:flex max-md:flex-col max-md:items-center">
           <h1 className="text-6xl max-md:text-center shadow_class">Creating the next generation of coders!</h1> 
           <p className="ml-3 max-md:text-center text-2xl mt-5">{"We're the James E. Taylor Computer Science Club. Our goal is to provide a place for students to learn, discuss, teach, and apply computer science skills through competitions, projects, workshops, and more!"}</p>
-          <div className="flex gap-5 mt-10 max-md:justify-center max-md:pb-20" onMouseLeave={()=>setShade(false)}>
+          <section role="region" className="flex gap-5 mt-10 max-md:justify-center max-md:pb-20" onMouseLeave={()=>setShade(false)}>
             <ShadeButton shade={!useShade} onMouseEnter={()=>setShade(true)} onClick={()=> redirect("/projects")}>Projects</ShadeButton>
             <ShadeButton shade={useShade} onMouseEnter={()=>setShade(false)} onClick={()=> redirect("/gallery")}>Gallery</ShadeButton>
-          </div>
+          </section>
         </div>
         <Model/>
       </Scroll>}
 
-      {commandFinished["start"] && (
+      {commandFinished.start && (
         <div className="">
           <Command text="cat pleasejoin.txt" callback={()=>{
             setCommandFinished({
@@ -57,7 +57,7 @@ export default function Home() {
             })
           }}/>
           {
-            commandFinished["pleasejoin"] && (
+            commandFinished.pleasejoin && (
               <Scroll>
                 <div className="text-center flex flex-col items-center mt-10 gap-3">
                     <h2 className="shadow_class text-white text-7xl">You Belong Here</h2>
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       )}
 
-      {commandFinished["pleasejoin"] && 
+      {commandFinished.pleasejoin && 
       (
         <div className="mt-30">
           <Command text="cat project_highlight.txt" callback={()=>{
@@ -87,11 +87,11 @@ export default function Home() {
           }}/>
 
           {
-            commandFinished["project_highlight"] && (
+            commandFinished.project_highlight && (
               <Scroll className="flex text-center flex-col items-center mt-15">
                 <h2 className="shadow_class text-white text-6xl">Highlighted Projects</h2>
                 <div className="flex gap-5 flex-wrap justify-center mt-10">
-                    {useProjects && useProjects.map((e, idx)=><Project key={idx} project={e}/>)}
+                    { useProjects?.map((e)=><Project key={e.Name} project={e}/>)}
                 </div>
               </Scroll>
             )
@@ -101,7 +101,7 @@ export default function Home() {
       }
 
       {
-        commandFinished["project_highlight"] && (
+        commandFinished.project_highlight && (
           <div className="my-15">
             <Command text="cat faq.txt" callback={()=>{
               setCommandFinished({
@@ -111,11 +111,11 @@ export default function Home() {
             }}/>
             
             {
-              commandFinished["faq"] && (
+              commandFinished.faq && (
                 <Scroll className="flex flex-wrap gap-x-5 gap-y-5 pt-5 w-[70%] max-md:w-full max-md:flex-col max-md:items-center">
                   <Question question="Are there fees for the Computer Science Club?" answer="Our club will always be free! However, the CSHS does require an annual membership fee. If there are issues with affordability, please reach out to us and we can reduce/cover the fee."/>
                   <Question question="How much computer science do I need to know to join?" answer="You can join the club even if you don't any programming! However, to attend competitions and actively participate in our projects/activities, we recommend you take CSA (or learn the basics of the Java Programming Language)."/>
-                  <Question question="When are the meetings?" answer="We generally meet at the beginning of every month (always on a Wednesday) in Mr. Beck's room (room #1940). To stay notified, please either follow our Instagram or join our Remind/Discord."/>
+                  <Question question="When are the meetings?" answer="Our official meetings are always on the second Wednesday of every month in Mr. Beck's room (room #1940). To stay notified, please either follow our Instagram or join our Remind/Discord."/>
                   <Question question="I would like to show off some of my projects! Where can I do that?" answer="We showcase all of our member projects on our project page! On the page, there will be a link where you can submit your projects."/>
                 </Scroll>
               )
@@ -124,6 +124,6 @@ export default function Home() {
           </div>
         )
       }
-    </main>
+    </section>
   )
 }

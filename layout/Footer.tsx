@@ -1,5 +1,5 @@
-import { ForwardRefExoticComponent, RefAttributes } from "react";
-import { Megaphone, BoxIconProps, DiscordAlt, Instagram } from "@boxicons/react";
+import type { ForwardRefExoticComponent, RefAttributes } from "react";
+import { Megaphone, type BoxIconProps, DiscordAlt, Instagram } from "@boxicons/react";
 import Link from "next/link";
 
 type IconType = ForwardRefExoticComponent<BoxIconProps & RefAttributes<SVGSVGElement>>;
@@ -26,10 +26,10 @@ function Social({ title, link, icon: Icon }: { title: string, link: string, icon
 {
     return (
         <div className="group flex items-center gap-x-2 cursor-pointer max-md:flex-col">
-            <Link href={link} target="_blank" className="flex items-center justify-center border rounded-full p-2 max-md:p-5 transition-all group-hover:scale-90 group-hover:bg-white">
+            <Link href={link} target="_blank" aria-label={`Visit our ${title} page!`} className="flex items-center justify-center border rounded-full p-2 max-md:p-5 transition-all group-hover:scale-90 group-hover:bg-white">
                 <Icon size="md" className="group-hover:text-header transition-all"/>
             </Link>
-            <h3 className="text-2xl group-hover:underline">{title}</h3>
+            <p className="text-2xl group-hover:underline">{title}</p>
         </div>
     )
 }

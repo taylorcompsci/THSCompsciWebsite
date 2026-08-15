@@ -1,11 +1,11 @@
-import { type BlogPost } from "@/actions/BlogActions";
+import type { BlogPost } from "@/actions/BlogActions";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default function BlogPostOverview(props: BlogPost)
 {
     return (
-        <div className="pl-6 w-[70%] md:w-[50%] cursor-pointe transition-all hover:ml-3 cursor-pointer group" onClick={()=>redirect(`/blog/${props.id}`)}>
+        <Link className="pl-6 w-[70%] md:w-[50%] cursor-pointe transition-all hover:ml-3 cursor-pointer group" href={`/blog/${props.id}`}>
             <p className="text-gray-500 text-xl transition-colors group-hover:text-white">{`D://posts/${props.title.replaceAll(/\s/g, "-").toLowerCase()}.md`}</p>
             <div className="py-3 flex gap-6 border-b border-gray-500 transition-colors group-hover:border-white">
                 <Image src={`${props.thumbnail_url}`} 
@@ -25,7 +25,7 @@ export default function BlogPostOverview(props: BlogPost)
                 </div>
                 <p className="text-lg text-gray-500 transition-colors group-hover:text-white">{`${props.created_at.getUTCFullYear()}-${(props.created_at.getUTCMonth()+1).toString().padStart(2,"0")}-${props.created_at.getUTCDate().toString().padStart(2, "0")}`}</p>
             </div>
-        </div>
+        </Link>
     )
 }
 

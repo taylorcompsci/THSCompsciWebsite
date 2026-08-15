@@ -1,6 +1,6 @@
 # Roadmap
 - ## Add Schema validation through zod for project creation.
-- ##  Make officer page dynamic.
+- ## Make officer page dynamic.
 - ## Update resource page.
 - ## Allow outside contributors from the club for this repo.
 - ## ~~Maybe a blog? That would be kind of cool.~~
