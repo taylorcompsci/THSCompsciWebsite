@@ -6,7 +6,7 @@ frontend:
                - npm install
        build:
            commands:
-               - env | grep -e DYNAMO_DB_URL -e S3_BUCKET_URL -e REQUEST_URL -e GALLERY_BUCKET -e GALLERY_ACCESS_KEY -e GALLERY_ACCESS_KEY_ID >> .env.production
+               - env | grep -e DYNAMO_DB_URL -e REQUEST_URL -e PROJECT_S3_BUCKET_URL -e GALLERY_BUCKET -e GALLERY_BUCKET_URL -e GALLERY_ACCESS_KEY -e GALLERY_ACCESS_KEY_ID -e DYNAMO_DB_TABLE -e BLOG_API_GATEWAY -e GOOGLE_CALENDAR_URL -e GOOGLE_CALENDAR_API_KEY >> .env.production
                - npm run build
    artifacts:
        baseDirectory: .next
