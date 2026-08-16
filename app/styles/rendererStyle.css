@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
-@source "../node_modules/streamdown/dist/*.js";
-@source "../node_modules/@streamdown/code/dist/*.js";
-@source "../node_modules/@streamdown/math/dist/*.js";
+.katex .mathrm,
+.katex .text {
+  font-family: 'scientifica', monospace;
+}

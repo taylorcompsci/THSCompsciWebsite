@@ -1,18 +1,16 @@
 import Image from "next/image";
 
-import { Streamdown, defaultRehypePlugins } from "streamdown";
-import { harden } from "rehype-harden";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
-import { code } from "@streamdown/code";
-import { math } from "@streamdown/math";
-
-import 'katex/dist/katex.min.css';
 import "@/app/styles/rendererStyle.css";
-
+import 'katex/dist/katex.min.css'
+import CodeBlock from "@/util/Blog/CodeBlock";
 interface MarkdownRendererProps
 {
     children?: string;
-    className?: string;
     imageURL: string
 }
 
@@ -30,26 +28,18 @@ export default function MarkdownRenderer({ children, imageURL, ...props }: Markd
     }   
 
     return (
-        <Streamdown {...props} 
-        shikiTheme={["github-dark", "github-dark"]}
-          rehypePlugins={[
-            defaultRehypePlugins.raw,
-            defaultRehypePlugins.sanitize,
-            [
-            harden,
-            {
-                allowedImagePrefixes: [imageURL],
-                allowDataImages: true,
-            },
-            ],
-        ]}
-        components={{
-            img: ({ src, alt, width, height}) => <Image placeholder="blur" blurDataURL="/assets/placeholder.webp" width={Number.parseInt((width?? 1200).toString(), 10)} height={Number.parseInt((height ?? 630).toString(), 10)} unoptimized src={normalizeAssetUrl(src?.toString())} alt={alt ?? "Unknown"} className="object-cover border-white"/>,
-        }} 
-        plugins={{ code: code, math: math}}
-        >
-            {children}
-        </Streamdown>
+        <article className="language-math">
+            <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            components={{
+                img: ({ src, alt, width, height}) => <Image placeholder="blur" blurDataURL="/assets/placeholder.webp" width={Number.parseInt((width?? 1200).toString(), 10)} height={Number.parseInt((height ?? 630).toString(), 10)} unoptimized src={normalizeAssetUrl(src?.toString())} alt={alt ?? "Unknown"} className="object-cover border-white"/>,
+                code: CodeBlock
+            }} 
+            >
+                {children}
+            </ReactMarkdown>
+        </article>
     )
 }
 
