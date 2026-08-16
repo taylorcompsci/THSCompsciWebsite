@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
+
 .katex .mathrm,
 .katex .text {
   font-family: 'scientifica', monospace;
+}
+
+pre {
+  display: hidden;
 }
