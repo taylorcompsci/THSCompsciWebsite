@@ -2,6 +2,7 @@
 
 import type { ProjectProps } from "@/util/Project";
 import { S3Client, paginateListObjectsV2 } from "@aws-sdk/client-s3";
+import { isValidURL } from "@/actions/ClientActions";
 
 
 
@@ -26,7 +27,7 @@ export async function getProjects(): Promise<ProjectProps[]>
             return projects.map(project=> {
                 return {
                     ...project,
-                    "imageLink": `${process.env.PROJECT_S3_BUCKET_URL ?? "UNKNOWN PROJECT_S3_BUCKET_URL"}${project.imageLink}`
+                    "imageLink": (isValidURL(project.imageLink) ? project.imageLink : `${process.env.PROJECT_S3_BUCKET_URL ?? "UNKNOWN PROJECT_S3_BUCKET_URL"}${project.imageLink}`)
                 }
             });
 
@@ -84,18 +85,24 @@ export async function uploadImage(file: File)
     }).then(res=>res.json())
     .then(async (data: RequestUrl) => {
 
+        console.log(`[DATA]: ${JSON.stringify(data)}`);
+
+        console.log("Injected headers...");
         const headers = new Headers();
         headers.append("Content-Type", file.type);
 
+        console.log("Sending upload request...");
         const photo = await fetch(data.uploadURL, {
             method: "PUT",
             headers: headers,
             body: file
         })
-        .then(()=>process.env.PROJECT_S3_BUCKET_URL+data.Key)
-        .catch(()=>null);
+        // .then(()=>process.env.PROJECT_S3_BUCKET_URL+data.Key)
+        .catch((e)=>console.error(`[ERROR]: ${e}`));
 
-        return photo;
+        console.log(`[photo]: ${JSON.stringify(photo)}`);
+
+        return process.env.PROJECT_S3_BUCKET_URL+data.Key;
     })
 }
 
