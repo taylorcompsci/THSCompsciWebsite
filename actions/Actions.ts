@@ -107,7 +107,7 @@ export async function uploadImage(file: File)
 }
 
 const s3 = new S3Client({
-    region: process.env.AWS_REGION,
+    region: process.env.GALLERY_AWS_REGION,
     credentials: 
     {
         accessKeyId: process.env.GALLERY_ACCESS_KEY_ID ?? "UNKNOWN GALLERY_ACCESS_KEY_ID",
